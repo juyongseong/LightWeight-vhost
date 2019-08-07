@@ -1,0 +1,48 @@
+#include <linux/init.h>
+#include <linux/module.h>
+#include <linux/kernel.h>
+//#include <stdlib.h>
+#include <linux/delay.h>
+#include <linux/time.h>
+struct timespec start_point, end_point;
+long double operating_time;
+int sec;
+long nsec;
+
+extern void f1(void) {
+        getnstimeofday(&start_point);
+        msleep(1);
+        getnstimeofday(&end_point);
+	sec = end_point.tv_sec - start_point.tv_sec;
+	nsec = end_point.tv_nsec - start_point.tv_nsec;
+	if(sec!=0 && nsec < 0) 
+			nsec = 1000000000 - start_point.tv_nsec + end_point.tv_nsec;
+	printk("%d.%09ld\n", sec, nsec);
+}
+
+extern void f2(void) {
+	getnstimeofday(&start_point);
+        //msleep(1);
+        getnstimeofday(&end_point);
+        sec = end_point.tv_sec - start_point.tv_sec;
+        nsec = end_point.tv_nsec - start_point.tv_nsec;
+        if(sec!=0 && nsec < 0) 
+                        nsec = 1000000000 - start_point.tv_nsec + end_point.tv_nsec;
+        printk("%d.%09ld\n", sec, nsec);
+
+}
+
+static int __init init_hello(void){
+        printk(KERN_ALERT "Hello, kernel!\n");
+	f1();
+	f2();
+        return 0;
+}
+
+static void __exit exit_hello(void){
+        printk(KERN_ALERT "Good-bye, kernel!\n");
+}
+
+module_init(init_hello);
+module_exit(exit_hello);
+MODULE_LICENSE("GPL");
