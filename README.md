@@ -6,8 +6,8 @@ file description
 
 2. shfile is .sh file
 
-3. modulefile/test is module compile file
+3. moduletest/test is module compile file
 
-4. modulefile/vhost is editing and testing vhost file
+4. moduletest/vhost is editing and testing vhost file
 
 5. tracefile is ftrace file
