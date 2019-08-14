@@ -1,3 +1,3 @@
-/home/jy-os/lab/LightWeight-vhost/test4/hello.ko
-/home/jy-os/lab/LightWeight-vhost/test4/hello.o
+/home/jy-os/lab/LightWeight-vhost/moduletest/test4/hello.ko
+/home/jy-os/lab/LightWeight-vhost/moduletest/test4/hello.o
 
