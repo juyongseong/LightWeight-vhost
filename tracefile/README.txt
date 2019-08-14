@@ -1,12 +1,9 @@
 ftrace trace file
-190813 : 6 vm's vhost*, handle_rx, handle_tx function_graph trace file
-190814 : 1 vm's vhost*, handle_rx, handle_tx function_graph trace file
-190814_2 : 1 vm's all functions enabled graph trace file
-<<<<<<< HEAD
-190814_3 : 
-=======
-190814_4 : 1 vm's vhost*, handle_rx, handle_tx function_graph  UDP netperf trace file
->>>>>>> 0d21ccb71f97d08c57660c61906a138e3cbc5a15
+190813 : 6 vm's vhost*, handle_rx, handle_tx function_graph | TCP_STREAM | 64 size trace file
+190814 : 1 vm's vhost*, handle_rx, handle_tx function_graph | TCP_STREAM | 64 size trace file
+190814_2 : 1 vm's all functions enabled graph | TCP_STREAM | 64 size trace file
+190814_3 : 1 vm's vhost*, handle_rx, handle_tx function_graph | UDP netperf | 64 size trace file
+190814_4 : 1 vm's vhost*, handle_rx, handle_tx function_graph | UDP netperf | 1024 size trace file
 
 function description
 /* handle_rx [vhost_net] */                               // 항상 RCU의 읽기 크기 중요 섹션 역할을 하는 워크 큐에서 예상된다.
