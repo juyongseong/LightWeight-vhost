@@ -1,7 +1,7 @@
 ftrace trace file
-
-190814 : vhost*, handle_rx, handle_tx function_graph trace file
-190814_2 : all functions enabled graph trace file
+190813 : 6 vm's vhost*, handle_rx, handle_tx function_graph trace file
+190814 : 1 vm's vhost*, handle_rx, handle_tx function_graph trace file
+190814_2 : 1 vm's all functions enabled graph trace file
 
 
 function description
