@@ -36,6 +36,13 @@
 
 #include "vhost.h"
 
+//juyoug test header start
+//
+//
+#include <linux/time.h>
+struct timespec mycheckpoint;
+//juyong test header end
+
 static int experimental_zcopytx = 1;
 module_param(experimental_zcopytx, int, 0444);
 MODULE_PARM_DESC(experimental_zcopytx, "Enable Zero Copy TX;"
@@ -981,9 +988,13 @@ static void handle_tx(struct vhost_net *net)
 		handle_tx_zerocopy(net, sock);
 	else
 		handle_tx_copy(net, sock);
+	getnstimeofday(&mycheckpoint);
+	printk("@@handle_tx@@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
 
 out:
 	mutex_unlock(&vq->mutex);
+	getnstimeofday(&mycheckpoint);
+	printk("@@handle_tx out: @@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
 }
 
 static int peek_head_len(struct vhost_net_virtqueue *rvq, struct sock *sk)
@@ -1248,9 +1259,16 @@ static void handle_rx(struct vhost_net *net)
 		vhost_poll_queue(&vq->poll);
 	else
 		vhost_net_enable_vq(net, vq);
+
+	getnstimeofday(&mycheckpoint);
+	printk("@@handle_rx@@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
+
 out:
 	vhost_net_signal_used(nvq);
 	mutex_unlock(&vq->mutex);
+	getnstimeofday(&mycheckpoint);
+	printk("@@handle_rx out :@@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
+
 }
 
 static void handle_tx_kick(struct vhost_work *work)

@@ -33,6 +33,18 @@
 #include <linux/nospec.h>
 
 #include "vhost.h"
+//juyoung test header start
+//
+//
+#include <linux/time.h>
+struct timespec mycheckpoint;
+
+//juyoung test header end
+
+
+
+
+
 
 static ushort max_mem_regions = 64;
 module_param(max_mem_regions, ushort, 0444);
@@ -256,8 +268,11 @@ EXPORT_SYMBOL_GPL(vhost_poll_flush);
 
 void vhost_work_queue(struct vhost_dev *dev, struct vhost_work *work)
 {
-	if (!dev->worker)
+	if (!dev->worker){
+		getnstimeofday(&mycheckpoint);
+		printk("@@vhost_work_queue@@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
 		return;
+	}
 
 	if (!test_and_set_bit(VHOST_WORK_QUEUED, &work->flags)) {
 		/* We can only add the work to the list after we're
@@ -267,6 +282,8 @@ void vhost_work_queue(struct vhost_dev *dev, struct vhost_work *work)
 		llist_add(&work->node, &dev->work_list);
 		wake_up_process(dev->worker);
 	}
+	getnstimeofday(&mycheckpoint);
+	printk("@@vhost_work_queue@@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
 }
 EXPORT_SYMBOL_GPL(vhost_work_queue);
 

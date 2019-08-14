@@ -1,131 +1,35 @@
-/********************************************************
-********함수가 시작되고 종료되기 까지의 시간 측정********
-********************************************************/
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
 //#include <stdlib.h>
 #include <linux/delay.h>
 #include <linux/time.h>
-#include <linux/string.h>
+struct timespec start_point, end_point;
+long double operating_time;
 
-//struct timespec start_point, end_point;
-//int sec;
-//long nsec;
-#define MAX_FUNC 20					//허용가능한 함수의 개수
-#define return {fperf_end(__func__); return;}
-int fperf_num=0;					//현재 함수의 개수
-
-struct fperf {
-	const char* str;
-	struct timespec start_point, end_point;
-	int sec;					//아직 미사용 총합?
-	long nsec;					//"
-};
-
-struct fperf fperf_arr[MAX_FUNC];			//배열대신 맵이나 벡터등을 사용할수 있을까?(속도측면,,)
-
-extern void fperf_start(const char * str) {
-	int i;
-	struct fperf *fpp=NULL;
-	for(i=0; i<fperf_num; i++) {			//배열에 포함되어있는지 확인
-		if(strcmp(fperf_arr[i].str, str)==0) {	//함수이름 비교
-			fpp = &fperf_arr[i];
-			break;
-		}
-	}
-	if(fpp == NULL) {					//등록된 함수가 없다면 추가
-		fperf_num++;
-		fpp = &fperf_arr[fperf_num-1];
-		fpp->str = str;
-		fpp->sec =0;
-		fpp->nsec =0;
-		getnstimeofday(&(fpp->start_point));
-	} else {
-		getnstimeofday(&(fpp->start_point));
-	}
-}
-
-extern void fperf_end(const char * str) {
-	int i, sec;
-	long nsec;
-	struct fperf *fpp=NULL;
-	for(i=0; i<fperf_num; ++i) {
-		if(strcmp(fperf_arr[i].str, str)==0) {
-			fpp = &fperf_arr[i];
-			break;
-		}
-	}
-	if(fpp != NULL) {				//널포인터가 아니라면 => 등록된 함수라면
-		getnstimeofday(&(fpp->end_point));
-		sec = fpp->end_point.tv_sec - fpp->start_point.tv_sec;
-        	nsec = fpp->end_point.tv_nsec - fpp->start_point.tv_nsec;
-		fpp->sec += sec;
-		fpp->nsec += nsec;
-		if(fpp->nsec >= 1000000000) {
-			fpp->sec++;
-			fpp->nsec-=1000000000;
-		}
-        	if(sec!=0 && nsec < 0)
-                	        nsec = 1000000000 - fpp->start_point.tv_nsec + fpp->end_point.tv_nsec;
-        	printk("%s %d.%09ld\n",str, sec, nsec);
-	}
-}
 extern void f1(void) {
-	fperf_start(__func__);
-        msleep(20);
-	return;
+        getnstimeofday(&start_point);
+        msleep(1);
+        getnstimeofday(&end_point);
+        //operating_time = (long double)((long double)(end_point.tv_sec-start_point.tv_sec)+(long double)(end_point.tv_nsec/1000000-start_point.tv_nsec/1000000)/1000000.0);
+        printk("%ld, %ld\n", start_point.tv_sec, end_point.tv_sec);
+        printk("%ld, %ld\n", start_point.tv_nsec, end_point.tv_nsec);
+        //printk("%Lf\n", operating_time);
 }
 
 extern void f2(void) {
-	fperf_start(__func__);
-        msleep(10);
-	return;
-}
-extern void f3(void) {
-	fperf_start(__func__);
 	msleep(1);
-	return;
-}
-extern void f11(void) {
-        fperf_start(__func__);
-        msleep(20);
-        return;
-}
-
-extern void f22(void) {
-        fperf_start(__func__);
-        msleep(10);
-	f11();
-        return;
-}
-extern int f33(void) {
-        fperf_start(__func__);
-        msleep(1);
-	f22();
-	return 0;
 }
 
 static int __init init_hello(void){
-	int i;
         printk(KERN_ALERT "Hello, kernel!\n");
-	printk(KERN_ALERT "test1\n");
 	f1();
 	f2();
-	f3();
-	printk(KERN_ALERT "test2\n");
-	i = f33();
-	printk("%d,\n", i);
-	return 0;
+        return 0;
 }
 
 static void __exit exit_hello(void){
-	int i;
         printk(KERN_ALERT "Good-bye, kernel!\n");
-	printk("total run time\n");
-	for(i=0; i<fperf_num; ++i) {
-		printk("%s %d.%09ld\n",fperf_arr[i].str, fperf_arr[i].sec, fperf_arr[i].nsec);
-	}
 }
 
 module_init(init_hello);
