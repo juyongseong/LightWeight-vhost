@@ -4,7 +4,8 @@ ftrace trace file
 190814_2 : 1 vm's all functions enabled graph | TCP_STREAM | 64 size trace file
 190814_3 : 1 vm's vhost*, handle_rx, handle_tx function_graph | UDP netperf | 64 size trace file
 190814_4 : 1 vm's vhost*, handle_rx, handle_tx function_graph | UDP netperf | 1024 size trace file
-
+190815 : 1 vm's vhost*, handle_rx*, handle_tx* function_graph | UDP netperf | 64 size trace file
+190815_2 : 190815's options + abtime add
 function description
 /* handle_rx [vhost_net] */                               // 항상 RCU의 읽기 크기 중요 섹션 역할을 하는 워크 큐에서 예상된다.
  2)               |  handle_rx [vhost_net]() {
