@@ -972,6 +972,9 @@ static void handle_tx(struct vhost_net *net)
 	struct vhost_net_virtqueue *nvq = &net->vqs[VHOST_NET_VQ_TX];
 	struct vhost_virtqueue *vq = &nvq->vq;
 	struct socket *sock;
+	getnstimeofday(&mycheckpoint);
+	printk("@@handle_tx start @@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
+
 
 	mutex_lock_nested(&vq->mutex, VHOST_NET_VQ_TX);
 	sock = vq->private_data;
@@ -989,12 +992,12 @@ static void handle_tx(struct vhost_net *net)
 	else
 		handle_tx_copy(net, sock);
 	getnstimeofday(&mycheckpoint);
-	printk("@@handle_tx@@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
+	printk("@@handle_tx end @@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
 
 out:
 	mutex_unlock(&vq->mutex);
 	getnstimeofday(&mycheckpoint);
-	printk("@@handle_tx out: @@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
+	printk("@@handle_tx out: end @@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
 }
 
 static int peek_head_len(struct vhost_net_virtqueue *rvq, struct sock *sk)

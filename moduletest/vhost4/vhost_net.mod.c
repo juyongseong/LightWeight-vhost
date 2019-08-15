@@ -28,4 +28,4 @@ __attribute__((section(".modinfo"))) =
 "depends=vhost,tap";
 
 
-MODULE_INFO(srcversion, "F7CC6AD34C8CCE5987245C9");
+MODULE_INFO(srcversion, "E6AD7B4EA5E59849EC1F1B7");
