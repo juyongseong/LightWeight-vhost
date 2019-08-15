@@ -81,7 +81,7 @@ tcp 통신에서 비효율적인구조 발견 (190815_3 중간 부분 참고)
 4266129.266690 |   0)               |          get_tx_bufs [vhost_net]() {
 4266129.266690 |   0)   0.121 us    |            vhost_get_vq_desc [vhost]();
 4266129.266690 |   0)   0.326 us    |          }
-4266129.266690 |   0)   0.134 us    |          vhost_enable_notify [vhost]();
+4266129.266690 |   0)   0.134 us    |          vhost_enable_notify [vhost](); /* OK, now we need to know about added descriptors. */
 4266129.266690 |   0)   4.028 us    |        }
 4266129.266690 |   0)   4.860 us    |      }
 4266129.266690 |   0)   5.060 us    |    }
