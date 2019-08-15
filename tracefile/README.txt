@@ -37,12 +37,31 @@ function description
 0)   0.352 us    |            }
 0)   0.126 us    |            vhost_signal [vhost](); //This actually signals the guest, using eventfd.
 0)   0.788 us    |          }							    //반복 끝
-0)               |          vhost_poll_queue [vhost]() {
+0)               |          vhost_poll_queue [vhost]() { // 아마 중단하는 코드로 현재 예상
 0)   0.189 us    |            vhost_work_queue [vhost]();
 0)   0.400 us    |          }
 0) # 1027.732 us |        }
 0) # 1028.648 us |      }
 0) # 1028.849 us |    }
+
+
+구조
+handle_tx {
+  handle_tx_zerocopy{
+    for(;;) {
+      vhost_zerocopy_signal_used() 
+      if(Nothing new?  Wait for eventfd to tell us they refilled)
+        vhost_work_queue();
+      vhost_add_used_and_signal
+      if(vhost_exceeds_weight) //Max number of bytes transferred before requeueing the job. 정도를 초과했다면
+        vhost_work_queue();
+    }
+  }
+}
+
+
+
+
 
 /* handle_rx [vhost_net] */                               // 항상 RCU의 읽기 크기 중요 섹션 역할을 하는 워크 큐에서 예상된다.
  2)               |  handle_rx [vhost_net]() {
