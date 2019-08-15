@@ -59,7 +59,8 @@ handle_tx {
   }
 }
 
-tcp 통신에서 비효율적인구조 발견
+tcp 통신에서 비효율적인구조 발견 (190815_3 중간 부분 참고)
+
 4266129.266685 |   0)               |    handle_tx_kick [vhost_net]() {
 4266129.266685 |   0)               |      handle_tx [vhost_net]() {
 4266129.266686 |   0)   0.108 us    |        vq_iotlb_prefetch [vhost]();
