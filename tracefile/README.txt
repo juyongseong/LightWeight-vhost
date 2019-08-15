@@ -59,7 +59,44 @@ handle_tx {
   }
 }
 
+tcp 통신에서 비효율적인구조 발견
+4266129.266685 |   0)               |    handle_tx_kick [vhost_net]() {
+4266129.266685 |   0)               |      handle_tx [vhost_net]() {
+4266129.266686 |   0)   0.108 us    |        vq_iotlb_prefetch [vhost]();
+4266129.266686 |   0)   0.106 us    |        vhost_disable_notify [vhost]();
+4266129.266686 |   0)   0.101 us    |        vhost_poll_stop [vhost]();
+4266129.266686 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+4266129.266686 |   0)   0.102 us    |          vhost_zerocopy_signal_used [vhost_net]();
+4266129.266687 |   0)               |          get_tx_bufs [vhost_net]() {
+4266129.266687 |   0)               |            vhost_get_vq_desc [vhost]() {
+4266129.266687 |   0)   0.121 us    |              translate_desc [vhost]();
+4266129.266687 |   0)   0.107 us    |              translate_desc [vhost]();
+4266129.266687 |   0)   0.120 us    |              translate_desc [vhost]();
+4266129.266687 |   0)   0.862 us    |            }
+4266129.266688 |   0)   1.079 us    |          }
+4266129.266688 |   0)   0.117 us    |          vhost_vq_avail_empty [vhost]();
+4266129.266689 |   0)   0.129 us    |          vhost_zerocopy_signal_used [vhost_net]();
+4266129.266689 |   0)   0.107 us    |          vhost_zerocopy_signal_used [vhost_net]();
+4266129.266690 |   0)               |          get_tx_bufs [vhost_net]() {
+4266129.266690 |   0)   0.121 us    |            vhost_get_vq_desc [vhost]();
+4266129.266690 |   0)   0.326 us    |          }
+4266129.266690 |   0)   0.134 us    |          vhost_enable_notify [vhost]();
+4266129.266690 |   0)   4.028 us    |        }
+4266129.266690 |   0)   4.860 us    |      }
+4266129.266690 |   0)   5.060 us    |    }
+ ------------------------------------------
+ 0) vhost-2-26292  => CPU 0/K-26296 
+ ------------------------------------------
 
+4266129.266703 |   0)               |  vhost_poll_wakeup [vhost]() {
+4266129.266703 |   0)   0.721 us    |    vhost_work_queue [vhost]();
+4266129.266704 |   0)   0.977 us    |  }
+ ------------------------------------------
+ 0) CPU 0/K-26296  => vhost-2-26292 
+ ------------------------------------------
+
+4266129.266705 |   0)               |    handle_tx_kick [vhost_net]() {
+4266129.266705 |   0)               |      handle_tx [vhost_net]() {
 
 
 
