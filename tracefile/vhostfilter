@@ -1,0 +1,5 @@
+vhost*
+handle_tx*
+handle_rx*
+get_tx_bufs
+
