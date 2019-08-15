@@ -17,3 +17,22 @@ function description
  2)   0.362 us    |      }
  2)   0.568 us    |    }
  2)   1.461 us    |  }
+ ##udp 통신할때 handle_tx 동작
+ 2)               |  handle_tx_kick [vhost_net]() {
+ 2)               |    handle_tx [vhost_net]() {
+ 2)   0.112 us    |      vhost_disable_notify [vhost]();
+ 2)   0.103 us    |      vhost_poll_stop [vhost]();
+ 2)               |      handle_tx_zerocopy [vhost_net]() {
+ 2)   0.101 us    |        vhost_zerocopy_signal_used [vhost_net](); //반복시작
+ 2)   0.162 us    |        vhost_get_vq_desc [vhost]();
+ 2)   0.102 us    |        vhost_vq_avail_empty [vhost]();
+ 2)               |        vhost_add_used_and_signal [vhost]() {
+ 2)   0.140 us    |          vhost_add_used_n [vhost]();
+ 2)   0.127 us    |          vhost_signal [vhost]();
+ 2)   0.573 us    |        }                                         //
+2)               |        vhost_poll_queue [vhost]() {
+ 2)   0.141 us    |          vhost_work_queue [vhost]();
+ 2)   0.337 us    |        }
+ 2) ! 488.915 us  |      }
+ 2) ! 489.578 us  |    }
+ 2) ! 489.779 us  |  }
