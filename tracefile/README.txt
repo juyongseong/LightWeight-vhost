@@ -11,6 +11,9 @@ ftrace trace file
 190816_2 : 1 vm's all vhost possible trace file | TCP netperf | 64 size trace file
 190816_3 : _2 + 동작 최소한 커널 상태(echo 0 > tracing_on 후 cat trace), _2와 같은 결과
 190816_4 : 190816's options -+ 1024size 
+190816_5 : 190816's options + 6vm
+100816_6 : 190816_5's options + 4thread
+190816_7 : same 190816_6's options
 
 
 function description
