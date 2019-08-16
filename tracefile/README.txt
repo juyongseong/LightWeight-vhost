@@ -7,6 +7,10 @@ ftrace trace file
 190815 : 1 vm's vhost*, handle_rx*, handle_tx* function_graph | UDP netperf | 64 size trace file
 190815_2 : 190815's options + abtime add
 190815_3 : 1 vm's all vhost possible trace file | TCP netperf | 64 size trace file
+190816 : 1 vm's all vhost possible trace file | TCP netperf | 64 size trace file
+190816_2 : 1 vm's all vhost possible trace file | TCP netperf | 64 size trace file
+190816_3 : _2 + 동작 최소한 커널 상태(echo 0 > tracing_on 후 cat trace), _2와 같은 결과
+190816_4 : 190816's options -+ 1024size 
 
 
 function description
