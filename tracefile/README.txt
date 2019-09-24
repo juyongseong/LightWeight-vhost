@@ -109,7 +109,44 @@ tcp 통신에서 비효율적인구조 발견 (190815_3 중간 부분 참고)
 4266129.266705 |   0)               |      handle_tx [vhost_net]() {
 
 
-
+구조
+handle_rx {
+ mutex_lock_nested(&vq->mutex, VHOST_NET_VQ_RX);
+ if (!sock)
+		 goto out;
+	if (!vq_iotlb_prefetch(vq))
+		 goto out;
+ vhost_disable_notify(&net->dev, vq);
+	vhost_net_disable_vq(net, vq);
+ while() {
+  if(error)
+   goto out;
+  if (!headcount) {
+			if (unlikely(busyloop_intr)) {
+				vhost_poll_queue(&vq->poll);
+			} else if (unlikely(vhost_enable_notify(&net->dev, vq))) {
+				/* They have slipped one in as we were
+				 * doing that: check again. */
+				vhost_disable_notify(&net->dev, vq);
+				continue;
+			}
+			/* Nothing new?  Wait for eventfd to tell us
+			 * they refilled. */
+			goto out;
+		}
+  
+  if (unlikely(busyloop_intr))
+		vhost_poll_queue(&vq->poll);
+	else
+		vhost_net_enable_vq(net, vq);
+  
+  
+  out:
+	vhost_net_signal_used(nvq);
+	mutex_unlock(&vq->mutex);
+}
+  
+  
 /* handle_rx [vhost_net] */                               // 항상 RCU의 읽기 크기 중요 섹션 역할을 하는 워크 큐에서 예상된다.
  2)               |  handle_rx [vhost_net]() {
  2)   0.106 us    |    vhost_disable_notify [vhost]();    // 인터럽트 또는 신호등을 보내지말게 설정. vq.플래그설정   
