@@ -113,34 +113,29 @@ tcp 통신에서 비효율적인구조 발견 (190815_3 중간 부분 참고)
 handle_rx {
  mutex_lock_nested(&vq->mutex, VHOST_NET_VQ_RX);
  if (!sock)
-		 goto out;
-	if (!vq_iotlb_prefetch(vq))
-		 goto out;
+	goto out;
+ if (!vq_iotlb_prefetch(vq))
+	goto out;
  vhost_disable_notify(&net->dev, vq);
-	vhost_net_disable_vq(net, vq);
- while() {
-  if(error)
-   goto out;
-  if (!headcount) {
-			if (unlikely(busyloop_intr)) {
-				vhost_poll_queue(&vq->poll);
-			} else if (unlikely(vhost_enable_notify(&net->dev, vq))) {
-				/* They have slipped one in as we were
-				 * doing that: check again. */
-				vhost_disable_notify(&net->dev, vq);
-				continue;
-			}
-			/* Nothing new?  Wait for eventfd to tell us
-			 * they refilled. */
-			goto out;
+ vhost_net_disable_vq(net, vq);
+ while(vhost_net_rx_peek_head_len) {
+  	if(error)
+   		goto out;
+  	if (!headcount) {
+		if (unlikely(busyloop_intr)) {
+			vhost_poll_queue(&vq->poll);
+		} else if (unlikely(vhost_enable_notify(&net->dev, vq))) {
+			vhost_disable_notify(&net->dev, vq);
+			continue;
 		}
+		goto out;
+	}
   
   if (unlikely(busyloop_intr))
 		vhost_poll_queue(&vq->poll);
 	else
 		vhost_net_enable_vq(net, vq);
-  
-  
+  if 
   out:
 	vhost_net_signal_used(nvq);
 	mutex_unlock(&vq->mutex);
