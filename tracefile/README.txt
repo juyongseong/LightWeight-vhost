@@ -110,6 +110,9 @@ tcp 통신에서 비효율적인구조 발견 (190815_3 중간 부분 참고)
 
 
 구조
+
+kthread -> vhost_worker -> handle_tx_kick -> handle_tx_zerocopy
+
 handle_rx {
  mutex_lock_nested(&vq->mutex, VHOST_NET_VQ_RX);
  if (!sock)
