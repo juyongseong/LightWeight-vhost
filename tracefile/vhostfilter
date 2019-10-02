@@ -1,0 +1,13 @@
+vhost*
+handle_tx*
+handle_rx*
+__vhost*
+get_tx_bufs
+vq_memory_access_ok
+vq_log_access_ok
+memory_access_ok.isra.29
+vq_access_ok
+translate_desc
+iotlb_access_ok
+vq_iotlb_prefetch
+peek_head_len.part.17
