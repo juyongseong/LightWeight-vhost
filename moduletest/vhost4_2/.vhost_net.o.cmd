@@ -1,0 +1,1 @@
+cmd_/home/jy-os/lab/LightWeight-vhost/moduletest/vhost4_2/vhost_net.o := ld -m elf_x86_64  -z max-page-size=0x200000    -r -o /home/jy-os/lab/LightWeight-vhost/moduletest/vhost4_2/vhost_net.o /home/jy-os/lab/LightWeight-vhost/moduletest/vhost4_2/net.o 

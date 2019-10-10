@@ -1,0 +1,798 @@
+# tracer: function_graph
+#
+#     TIME        CPU  DURATION                  FUNCTION CALLS
+#      |          |     |   |                     |   |   |   |
+ 1174.175031 |   5)               |  vhost_net_open [vhost_net]() {
+ 1174.175034 |   5)   0.415 us    |    vhost_dev_init [vhost]();
+ 1174.175034 |   5)   0.179 us    |    vhost_poll_init [vhost]();
+ 1174.175035 |   5)   0.118 us    |    vhost_poll_init [vhost]();
+ 1174.175035 |   5)   5.273 us    |  }
+ 1174.279435 |   3)               |  vhost_net_ioctl [vhost_net]() {
+ 1174.279436 |   3)   0.261 us    |    vhost_dev_has_owner [vhost]();
+ 1174.279437 |   3)               |    vhost_dev_set_owner [vhost]() {
+ 1174.280088 |   3)   0.834 us    |      vhost_work_queue [vhost]();
+ 1174.280088 |   3)               |      vhost_work_flush.part.22 [vhost]() {
+ 1174.280088 |   3)   0.142 us    |        vhost_work_queue [vhost]();
+ ------------------------------------------
+ 3)  qemu-sy-2551  =>  vhost-2-2566 
+ ------------------------------------------
+
+ 1174.280090 |   3)               |  vhost_worker [vhost]() {
+ 1174.280090 |   3) + 31.869 us   |    vhost_attach_cgroups_work [vhost]();
+ 1174.280122 |   3)   1.391 us    |    vhost_flush_work [vhost]();
+ ------------------------------------------
+ 3)  vhost-2-2566  =>  qemu-sy-2551 
+ ------------------------------------------
+
+ 1174.280125 |   3) + 37.010 us   |      }
+ 1174.280127 |   3) ! 689.157 us  |    } /* vhost_dev_set_owner [vhost] */
+ 1174.280127 |   3)               |    vhost_net_flush [vhost_net]() {
+ 1174.280127 |   3)               |      vhost_poll_flush [vhost]() {
+ 1174.280127 |   3)               |        vhost_work_flush.part.22 [vhost]() {
+ 1174.280127 |   3)   0.852 us    |          vhost_work_queue [vhost]();
+ ------------------------------------------
+ 3)  qemu-sy-2551  =>  vhost-2-2566 
+ ------------------------------------------
+
+ 1174.280129 |   3)   0.718 us    |    vhost_flush_work [vhost]();
+ ------------------------------------------
+ 3)  vhost-2-2566  =>  qemu-sy-2551 
+ ------------------------------------------
+
+ 1174.280130 |   3)   3.419 us    |        }
+ 1174.280131 |   3)   3.630 us    |      }
+ 1174.280131 |   3)               |      vhost_poll_flush [vhost]() {
+ 1174.280131 |   3)               |        vhost_work_flush.part.22 [vhost]() {
+ 1174.280131 |   3)   0.675 us    |          vhost_work_queue [vhost]();
+ ------------------------------------------
+ 3)  qemu-sy-2551  =>  vhost-2-2566 
+ ------------------------------------------
+
+ 1174.280132 |   3)   0.695 us    |    vhost_flush_work [vhost]();
+ ------------------------------------------
+ 3)  vhost-2-2566  =>  qemu-sy-2551 
+ ------------------------------------------
+
+ 1174.280134 |   3)   3.174 us    |        }
+ 1174.280134 |   3)   3.397 us    |      }
+ 1174.280134 |   3)               |      vhost_poll_flush [vhost]() {
+ 1174.280134 |   3)               |        vhost_work_flush.part.22 [vhost]() {
+ 1174.280134 |   3)   0.640 us    |          vhost_work_queue [vhost]();
+ ------------------------------------------
+ 3)  qemu-sy-2551  =>  vhost-2-2566 
+ ------------------------------------------
+
+ 1174.280136 |   3)   0.685 us    |    vhost_flush_work [vhost]();
+ ------------------------------------------
+ 3)  vhost-2-2566  =>  qemu-sy-2551 
+ ------------------------------------------
+
+ 1174.280137 |   3)   3.029 us    |        }
+ 1174.280137 |   3)   3.244 us    |      }
+ 1174.280138 |   3)               |      vhost_poll_flush [vhost]() {
+ 1174.280138 |   3)               |        vhost_work_flush.part.22 [vhost]() {
+ 1174.280138 |   3)   0.650 us    |          vhost_work_queue [vhost]();
+ ------------------------------------------
+ 3)  qemu-sy-2551  =>  vhost-2-2566 
+ ------------------------------------------
+
+ 1174.280139 |   3)   0.687 us    |    vhost_flush_work [vhost]();
+ ------------------------------------------
+ 3)  vhost-2-2566  =>  qemu-sy-2551 
+ ------------------------------------------
+
+ 1174.280141 |   3)   2.959 us    |        }
+ 1174.280141 |   3)   3.173 us    |      }
+ 1174.280141 |   3) + 13.991 us   |    } /* vhost_net_flush [vhost_net] */
+ 1174.280141 |   3) ! 707.728 us  |  } /* vhost_net_ioctl [vhost_net] */
+ 1174.280142 |   3)   0.188 us    |  vhost_net_ioctl [vhost_net]();
+ 1174.280145 |   3)               |  vhost_net_ioctl [vhost_net]() {
+ 1174.280145 |   3)   0.113 us    |    vhost_dev_ioctl [vhost]();
+ 1174.280145 |   3)   0.251 us    |    vhost_vring_ioctl [vhost]();
+ 1174.280146 |   3)   0.834 us    |  }
+ 1174.280147 |   3)               |  vhost_net_ioctl [vhost_net]() {
+ 1174.280147 |   3)   0.111 us    |    vhost_dev_ioctl [vhost]();
+ 1174.280147 |   3)   0.214 us    |    vhost_vring_ioctl [vhost]();
+ 1174.280147 |   3)   0.674 us    |  }
+ 1179.320162 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320163 |   2)   0.221 us    |    vhost_dev_ioctl [vhost]();
+ 1179.320164 |   2)   0.497 us    |    vhost_vring_ioctl [vhost]();
+ 1179.320164 |   2)   3.147 us    |  }
+ 1179.320172 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320172 |   2)   0.122 us    |    vhost_dev_ioctl [vhost]();
+ 1179.320172 |   2)   0.332 us    |    vhost_vring_ioctl [vhost]();
+ 1179.320173 |   2)   0.856 us    |  }
+ 1179.320198 |   2)   0.305 us    |  vhost_net_ioctl [vhost_net]();
+ 1179.320198 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320199 |   2)               |    vhost_dev_ioctl [vhost]() {
+ 1179.320199 |   2)   0.150 us    |      vhost_umem_alloc [vhost]();
+ 1179.320200 |   2)   0.163 us    |      vhost_new_umem_range [vhost]();
+ 1179.320200 |   2)   0.146 us    |      vhost_new_umem_range [vhost]();
+ 1179.320200 |   2)               |      vhost_new_umem_range [vhost]() {
+ 1179.320200 |   2)   0.140 us    |        vhost_umem_interval_tree_augment_rotate [vhost]();
+ 1179.320200 |   2)   0.480 us    |      }
+ 1179.320201 |   2)   0.142 us    |      vhost_new_umem_range [vhost]();
+ 1179.320201 |   2)   0.205 us    |      memory_access_ok.isra.29 [vhost]();
+ 1179.320201 |   2)   0.111 us    |      vhost_umem_clean [vhost]();
+ 1179.320201 |   2)   2.868 us    |    }
+ 1179.320202 |   2)               |    vhost_net_flush [vhost_net]() {
+ 1179.320202 |   2)               |      vhost_poll_flush [vhost]() {
+ 1179.320202 |   2)               |        vhost_work_flush.part.22 [vhost]() {
+ 1179.320202 |   2)   1.696 us    |          vhost_work_queue [vhost]();
+ ------------------------------------------
+ 3)  qemu-sy-2551  =>  vhost-2-2566 
+ ------------------------------------------
+
+ 1179.320240 |   3)   2.804 us    |    vhost_flush_work [vhost]();
+ 1179.320270 |   2) + 67.387 us   |        }
+ 1179.320270 |   2) + 68.002 us   |      }
+ 1179.320270 |   2)               |      vhost_poll_flush [vhost]() {
+ 1179.320270 |   2)               |        vhost_work_flush.part.22 [vhost]() {
+ 1179.320271 |   2)   1.884 us    |          vhost_work_queue [vhost]();
+ 1179.320302 |   3)   2.429 us    |    vhost_flush_work [vhost]();
+ 1179.320334 |   2) + 63.776 us   |        }
+ 1179.320335 |   2) + 64.481 us   |      }
+ 1179.320335 |   2)               |      vhost_poll_flush [vhost]() {
+ 1179.320335 |   2)               |        vhost_work_flush.part.22 [vhost]() {
+ 1179.320335 |   2)   1.897 us    |          vhost_work_queue [vhost]();
+ 1179.320367 |   3)   2.456 us    |    vhost_flush_work [vhost]();
+ 1179.320397 |   2) + 61.903 us   |        }
+ 1179.320397 |   2) + 62.589 us   |      }
+ 1179.320398 |   2)               |      vhost_poll_flush [vhost]() {
+ 1179.320398 |   2)               |        vhost_work_flush.part.22 [vhost]() {
+ 1179.320398 |   2)   1.909 us    |          vhost_work_queue [vhost]();
+ 1179.320430 |   3)   2.460 us    |    vhost_flush_work [vhost]();
+ 1179.320462 |   2) + 64.166 us   |        }
+ 1179.320462 |   2) + 64.869 us   |      }
+ 1179.320463 |   2) ! 260.809 us  |    }
+ 1179.320463 |   2) ! 264.404 us  |  }
+ 1179.320465 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320465 |   2)   0.118 us    |    vhost_dev_ioctl [vhost]();
+ 1179.320465 |   2)   0.394 us    |    vhost_vring_ioctl [vhost]();
+ 1179.320466 |   2)   1.077 us    |  }
+ 1179.320466 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320466 |   2)   0.115 us    |    vhost_dev_ioctl [vhost]();
+ 1179.320467 |   2)   0.168 us    |    vhost_vring_ioctl [vhost]();
+ 1179.320467 |   2)   0.643 us    |  }
+ 1179.320468 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320468 |   2)   0.115 us    |    vhost_dev_ioctl [vhost]();
+ 1179.320469 |   2)   0.211 us    |    vhost_vring_ioctl [vhost]();
+ 1179.320469 |   2)   0.687 us    |  }
+ 1179.320469 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320470 |   2)   0.109 us    |    vhost_dev_ioctl [vhost]();
+ 1179.320470 |   2)               |    vhost_vring_ioctl [vhost]() {
+ 1179.320470 |   2)               |      vhost_poll_start [vhost]() {
+ 1179.320470 |   2)   0.180 us    |        vhost_poll_func [vhost]();
+ 1179.320471 |   2)   1.862 us    |        vhost_work_queue [vhost]();
+ 1179.320472 |   2)   2.445 us    |      }
+ 1179.320473 |   2)   2.826 us    |    }
+ 1179.320473 |   2)   3.290 us    |  }
+ 1179.320474 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320475 |   2)   0.109 us    |    vhost_dev_ioctl [vhost]();
+ 1179.320475 |   2)   0.175 us    |    vhost_vring_ioctl [vhost]();
+ 1179.320475 |   2)   0.625 us    |  }
+ 1179.320476 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320476 |   2)   0.106 us    |    vhost_dev_ioctl [vhost]();
+ 1179.320476 |   2)   0.163 us    |    vhost_vring_ioctl [vhost]();
+ 1179.320476 |   2)   0.604 us    |  }
+ 1179.320477 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320477 |   2)   0.105 us    |    vhost_dev_ioctl [vhost]();
+ 1179.320477 |   2)   0.181 us    |    vhost_vring_ioctl [vhost]();
+ 1179.320478 |   2)   0.639 us    |  }
+ 1179.320478 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320478 |   2)   0.106 us    |    vhost_dev_ioctl [vhost]();
+ 1179.320478 |   2)               |    vhost_vring_ioctl [vhost]() {
+ 1179.320479 |   2)               |      vhost_poll_start [vhost]() {
+ 1179.320479 |   2)   0.129 us    |        vhost_poll_func [vhost]();
+ 1179.320479 |   2)   0.157 us    |        vhost_work_queue [vhost]();
+ 1179.320479 |   2)   0.841 us    |      }
+ 1179.320480 |   2)   1.110 us    |    }
+ 1179.320480 |   2)   1.548 us    |  }
+ 1179.320484 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320484 |   2)   0.108 us    |    vhost_dev_check_owner [vhost]();
+ 1179.320484 |   2)               |    vhost_vq_access_ok [vhost]() {
+ 1179.320484 |   2)               |      vq_log_access_ok [vhost]() {
+ 1179.320485 |   2)   0.213 us    |        vq_memory_access_ok [vhost]();
+ 1179.320485 |   2)   0.428 us    |      }
+ 1179.320485 |   2)   0.104 us    |      vq_access_ok [vhost]();
+ 1179.320485 |   2)   0.848 us    |    }
+ 1179.320486 |   2)   0.118 us    |    vhost_net_buf_unproduce [vhost_net]();
+ 1179.320486 |   2)               |    vhost_vq_init_access [vhost]() {
+ 1179.320487 |   2)   0.209 us    |      vhost_update_used_flags [vhost]();
+ 1179.320487 |   2)   0.519 us    |    }
+ 1179.320487 |   2)               |    vhost_net_enable_vq [vhost_net]() {
+ 1179.320487 |   2)               |      vhost_poll_start [vhost]() {
+ 1179.320487 |   2)   0.121 us    |        vhost_poll_func [vhost]();
+ 1179.320488 |   2)   0.319 us    |        vhost_work_queue [vhost]();
+ 1179.320488 |   2)   0.831 us    |      }
+ 1179.320488 |   2)   1.030 us    |    }
+ 1179.320488 |   2)   4.398 us    |  }
+ 1179.320489 |   2)               |  vhost_net_ioctl [vhost_net]() {
+ 1179.320489 |   2)   0.103 us    |    vhost_dev_check_owner [vhost]();
+ 1179.320489 |   2)               |    vhost_vq_access_ok [vhost]() {
+ 1179.320489 |   2)               |      vq_log_access_ok [vhost]() {
+ 1179.320489 |   2)   0.106 us    |        vq_memory_access_ok [vhost]();
+ 1179.320490 |   2)   0.306 us    |      }
+ 1179.320490 |   2)   0.115 us    |      vq_access_ok [vhost]();
+ 1179.320490 |   2)   0.716 us    |    }
+ 1179.320490 |   2)   0.156 us    |    vhost_net_buf_unproduce [vhost_net]();
+ 1179.320490 |   2)               |    vhost_vq_init_access [vhost]() {
+ 1179.320490 |   2)   0.114 us    |      vhost_update_used_flags [vhost]();
+ 1179.320491 |   2)   0.330 us    |    }
+ 1179.320491 |   2)               |    vhost_net_enable_vq [vhost_net]() {
+ 1179.320491 |   2)               |      vhost_poll_start [vhost]() {
+ 1179.320491 |   2)   0.222 us    |        vhost_poll_func [vhost]();
+ 1179.320491 |   2)   0.134 us    |        vhost_work_queue [vhost]();
+ 1179.320492 |   2)   0.693 us    |      }
+ 1179.320492 |   2)   0.890 us    |    }
+ 1179.320492 |   2)   2.889 us    |  }
+ 1179.320506 |   3)               |    handle_rx_kick [vhost_net]() {
+ 1179.320506 |   3)               |      handle_rx [vhost_net]() {
+ 1179.320507 |   3)   0.130 us    |        vq_iotlb_prefetch [vhost]();
+ 1179.320507 |   3)   0.116 us    |        vhost_disable_notify [vhost]();
+ 1179.320507 |   3)   0.181 us    |        vhost_poll_stop [vhost]();
+ 1179.320508 |   3)   0.452 us    |        vhost_net_buf_peek [vhost_net]();
+ 1179.320508 |   3)               |        vhost_get_vq_desc [vhost]() {
+ 1179.320508 |   2)               |  vhost_poll_wakeup [vhost]() {
+ 1179.320509 |   2)   0.213 us    |    vhost_work_queue [vhost]();
+ 1179.320509 |   3)   0.251 us    |          translate_desc [vhost]();
+ 1179.320509 |   2)   0.550 us    |  }
+ 1179.320509 |   3)   0.810 us    |        }
+ 1179.320511 |   3)   0.178 us    |        vhost_net_buf_peek [vhost_net]();
+ 1179.320512 |   3)               |        vhost_get_vq_desc [vhost]() {
+ 1179.320512 |   3)   0.111 us    |          translate_desc [vhost]();
+ 1179.320512 |   3)   0.366 us    |        }
+ 1179.320512 |   3)   0.168 us    |        vhost_net_buf_peek [vhost_net]();
+ 1179.320513 |   3)               |        vhost_get_vq_desc [vhost]() {
+ 1179.320513 |   3)   0.109 us    |          translate_desc [vhost]();
+ 1179.320513 |   3)   0.353 us    |        }
+ 1179.320513 |   3)   0.166 us    |        vhost_net_buf_peek [vhost_net]();
+ 1179.320514 |   3)               |        vhost_get_vq_desc [vhost]() {
+ 1179.320514 |   3)   0.105 us    |          translate_desc [vhost]();
+ 1179.320514 |   3)   0.353 us    |        }
+ 1179.320514 |   3)   0.106 us    |        vhost_net_buf_peek [vhost_net]();
+ 1179.320515 |   3)               |        vhost_get_vq_desc [vhost]() {
+ 1179.320515 |   3)   0.109 us    |          translate_desc [vhost]();
+ 1179.320515 |   3)   0.543 us    |        }
+ 1179.320516 |   3)   0.106 us    |        vhost_net_buf_peek [vhost_net]();
+ 1179.320516 |   3)               |        vhost_get_vq_desc [vhost]() {
+ 1179.320516 |   3)   0.268 us    |          translate_desc [vhost]();
+ 1179.320516 |   3)   0.524 us    |        }
+ 1179.320517 |   3)   0.118 us    |        vhost_net_buf_peek [vhost_net]();
+ 1179.320517 |   3)               |        vhost_get_vq_desc [vhost]() {
+ 1179.320517 |   3)   0.109 us    |          translate_desc [vhost]();
+ 1179.320517 |   3)   0.349 us    |        }
+ 1179.320518 |   3)   0.235 us    |        vhost_net_buf_peek [vhost_net]();
+ 1179.320518 |   3)               |        vhost_get_vq_desc [vhost]() {
+ 1179.320518 |   3)   0.107 us    |          translate_desc [vhost]();
+ 1179.320519 |   3)   0.343 us    |        }
+ 1179.320519 |   3)   0.206 us    |        vhost_net_buf_peek [vhost_net]();
+ 1179.320520 |   3)               |        vhost_get_vq_desc [vhost]() {
+ 1179.320520 |   3)   0.109 us    |          translate_desc [vhost]();
+ 1179.320520 |   3)   0.360 us    |        }
+ 1179.320521 |   3)   0.168 us    |        vhost_net_buf_peek [vhost_net]();
+ 1179.320521 |   3)               |        vhost_get_vq_desc [vhost]() {
+ 1179.320521 |   3)   0.107 us    |          translate_desc [vhost]();
+ 1179.320521 |   3)   0.350 us    |        }
+ 1179.320522 |   3)   0.132 us    |        vhost_net_buf_peek [vhost_net]();
+ 1179.320522 |   3)               |        vhost_net_enable_vq [vhost_net]() {
+ 1179.320522 |   3)               |          vhost_poll_start [vhost]() {
+ 1179.320522 |   3)   0.125 us    |            vhost_poll_func [vhost]();
+ 1179.320522 |   3)   0.480 us    |          }
+ 1179.320523 |   3)   0.682 us    |        }
+ 1179.320523 |   3)               |        vhost_add_used_and_signal_n [vhost]() {
+ 1179.320523 |   3)               |          vhost_add_used_n [vhost]() {
+ 1179.320523 |   3)   0.231 us    |            __vhost_add_used_n [vhost]();
+ 1179.320523 |   3)   0.463 us    |          }
+ 1179.320523 |   3)   0.803 us    |          vhost_signal [vhost]();
+ 1179.320524 |   3)   1.570 us    |        }
+ 1179.320524 |   3) + 17.920 us   |      }
+ 1179.320524 |   3) + 18.605 us   |    }
+ 1179.320525 |   3)               |    handle_tx_kick [vhost_net]() {
+ 1179.320525 |   3)               |      handle_tx [vhost_net]() {
+ 1179.320525 |   3)   0.107 us    |        vq_iotlb_prefetch [vhost]();
+ 1179.320525 |   3)   0.105 us    |        vhost_disable_notify [vhost]();
+ 1179.320525 |   3)   0.118 us    |        vhost_poll_stop [vhost]();
+ 1179.329076 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.329076 |   3)   0.165 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.329077 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.329077 |   3)   0.202 us    |            vhost_get_vq_desc [vhost]();
+ 1179.329077 |   3)   0.448 us    |          }
+ 1179.329077 |   3)   0.176 us    |          vhost_enable_notify [vhost]();
+ 1179.329077 |   3)   1.713 us    |        }
+ 1179.341158 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.341158 |   3)   0.158 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.341158 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.341159 |   3)   0.207 us    |            vhost_get_vq_desc [vhost]();
+ 1179.341159 |   3)   0.451 us    |          }
+ 1179.341159 |   3)   0.122 us    |          vhost_enable_notify [vhost]();
+ 1179.341159 |   3)   1.665 us    |        }
+ 1179.353071 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.353071 |   3)   0.150 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.353072 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.353072 |   3)   0.204 us    |            vhost_get_vq_desc [vhost]();
+ 1179.353072 |   3)   0.450 us    |          }
+ 1179.353072 |   3)   0.120 us    |          vhost_enable_notify [vhost]();
+ 1179.353072 |   3)   1.649 us    |        }
+ 1179.389080 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.389095 |   4)   0.218 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.389096 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.389096 |   4)   0.542 us    |            vhost_get_vq_desc [vhost]();
+ 1179.389096 |   4)   0.795 us    |          }
+ 1179.389097 |   4)   0.121 us    |          vhost_enable_notify [vhost]();
+ 1179.389097 |   4) + 17.485 us   |        }
+ 1179.401103 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.401104 |   3)   0.409 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.401105 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.401105 |   3)   0.572 us    |            vhost_get_vq_desc [vhost]();
+ 1179.401106 |   3)   1.212 us    |          }
+ 1179.401106 |   3)   0.304 us    |          vhost_enable_notify [vhost]();
+ 1179.401107 |   3)   4.368 us    |        }
+ 1179.413109 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.413109 |   3)   0.413 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.413110 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.413111 |   3)   0.505 us    |            vhost_get_vq_desc [vhost]();
+ 1179.413111 |   3)   1.154 us    |          }
+ 1179.413112 |   3)   0.307 us    |          vhost_enable_notify [vhost]();
+ 1179.413112 |   3)   4.306 us    |        }
+ 1179.425115 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.425116 |   3)   0.468 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.425117 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.425118 |   3)   0.621 us    |            vhost_get_vq_desc [vhost]();
+ 1179.425119 |   3)   1.380 us    |          }
+ 1179.425119 |   3)   0.380 us    |          vhost_enable_notify [vhost]();
+ 1179.425120 |   3)   5.181 us    |        }
+ 1179.437137 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.437139 |   3)   0.995 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.437140 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.437141 |   3)   1.011 us    |            vhost_get_vq_desc [vhost]();
+ 1179.437143 |   3)   2.370 us    |          }
+ 1179.437143 |   3)   0.612 us    |          vhost_enable_notify [vhost]();
+ 1179.437145 |   3)   9.843 us    |        }
+ 1179.449116 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.449118 |   3)   0.765 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.449120 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.449120 |   3)   1.019 us    |            vhost_get_vq_desc [vhost]();
+ 1179.449122 |   3)   2.253 us    |          }
+ 1179.449122 |   3)   0.630 us    |          vhost_enable_notify [vhost]();
+ 1179.449124 |   3)   8.469 us    |        }
+ 1179.461131 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.461133 |   3)   0.843 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.461134 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.461135 |   3)   1.186 us    |            vhost_get_vq_desc [vhost]();
+ 1179.461137 |   3)   2.422 us    |          }
+ 1179.461137 |   3)   0.630 us    |          vhost_enable_notify [vhost]();
+ 1179.461139 |   3)   8.796 us    |        }
+ 1179.473136 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.473138 |   3)   0.789 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.473140 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.473140 |   3)   1.020 us    |            vhost_get_vq_desc [vhost]();
+ 1179.473142 |   3)   2.256 us    |          }
+ 1179.473143 |   3)   0.615 us    |          vhost_enable_notify [vhost]();
+ 1179.473144 |   3)   8.475 us    |        }
+ 1179.485141 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.485142 |   3)   0.847 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.485144 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.485145 |   3)   1.021 us    |            vhost_get_vq_desc [vhost]();
+ 1179.485146 |   3)   2.295 us    |          }
+ 1179.485147 |   3)   0.625 us    |          vhost_enable_notify [vhost]();
+ 1179.485148 |   3)   8.630 us    |        }
+ 1179.497133 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.497135 |   3)   0.811 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.497136 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.497137 |   3)   1.022 us    |            vhost_get_vq_desc [vhost]();
+ 1179.497139 |   3)   2.267 us    |          }
+ 1179.497139 |   3)   0.634 us    |          vhost_enable_notify [vhost]();
+ 1179.497141 |   3)   8.583 us    |        }
+ 1179.509133 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.509135 |   3)   0.785 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.509136 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.509137 |   3)   0.974 us    |            vhost_get_vq_desc [vhost]();
+ 1179.509139 |   3)   2.247 us    |          }
+ 1179.509139 |   3)   0.635 us    |          vhost_enable_notify [vhost]();
+ 1179.509140 |   3)   8.606 us    |        }
+ 1179.521128 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.521130 |   4)   0.863 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.521132 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.521132 |   4)   1.207 us    |            vhost_get_vq_desc [vhost]();
+ 1179.521134 |   4)   2.457 us    |          }
+ 1179.521135 |   4)   0.635 us    |          vhost_enable_notify [vhost]();
+ 1179.521136 |   4)   9.088 us    |        }
+ 1179.533136 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.533138 |   4)   0.798 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.533140 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.533140 |   4)   1.081 us    |            vhost_get_vq_desc [vhost]();
+ 1179.533142 |   4)   2.362 us    |          }
+ 1179.533143 |   4)   0.638 us    |          vhost_enable_notify [vhost]();
+ 1179.533144 |   4)   8.709 us    |        }
+ 1179.545122 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.545124 |   4)   0.836 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.545125 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.545126 |   4)   1.156 us    |            vhost_get_vq_desc [vhost]();
+ 1179.545128 |   4)   2.448 us    |          }
+ 1179.545129 |   4)   0.612 us    |          vhost_enable_notify [vhost]();
+ 1179.545130 |   4)   8.694 us    |        }
+ 1179.557112 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.557113 |   4)   0.568 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.557114 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.557115 |   4)   0.779 us    |            vhost_get_vq_desc [vhost]();
+ 1179.557116 |   4)   1.634 us    |          }
+ 1179.557117 |   4)   0.421 us    |          vhost_enable_notify [vhost]();
+ 1179.557117 |   4)   5.880 us    |        }
+ ------------------------------------------
+ 5)  libvirt-1282  =>  vhost-2-2566 
+ ------------------------------------------
+
+ 1179.569102 |   5)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.569102 |   5)   0.216 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.569103 |   5)               |          get_tx_bufs [vhost_net]() {
+ 1179.569103 |   5)   0.349 us    |            vhost_get_vq_desc [vhost]();
+ 1179.569103 |   5)   0.692 us    |          }
+ 1179.569103 |   5)   0.123 us    |          vhost_enable_notify [vhost]();
+ 1179.569104 |   5)   2.794 us    |        }
+ 1179.581094 |   5)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.581095 |   5)   0.266 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.581096 |   5)               |          get_tx_bufs [vhost_net]() {
+ 1179.581096 |   5)   0.557 us    |            vhost_get_vq_desc [vhost]();
+ 1179.581097 |   5)   0.964 us    |          }
+ 1179.581097 |   5)   0.123 us    |          vhost_enable_notify [vhost]();
+ 1179.581097 |   5)   3.632 us    |        }
+ 1179.593127 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.593128 |   0)   0.238 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.593128 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.593128 |   0)   0.406 us    |            vhost_get_vq_desc [vhost]();
+ 1179.593129 |   0)   0.734 us    |          }
+ 1179.593129 |   0)   0.120 us    |          vhost_enable_notify [vhost]();
+ 1179.593129 |   0)   3.595 us    |        }
+ 1179.605102 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.605102 |   0)   0.160 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.605102 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.605103 |   0)   0.276 us    |            vhost_get_vq_desc [vhost]();
+ 1179.605103 |   0)   0.561 us    |          }
+ 1179.605103 |   0)   0.121 us    |          vhost_enable_notify [vhost]();
+ 1179.605103 |   0)   2.220 us    |        }
+ 1179.617087 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.617087 |   3)   0.166 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.617100 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.617100 |   3)   0.273 us    |            vhost_get_vq_desc [vhost]();
+ 1179.617101 |   3)   0.563 us    |          }
+ 1179.617101 |   3)   0.119 us    |          vhost_enable_notify [vhost]();
+ 1179.617101 |   3) + 15.032 us   |        }
+ 1179.629092 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.629093 |   3)   0.154 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.629093 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.629093 |   3)   0.251 us    |            vhost_get_vq_desc [vhost]();
+ 1179.629093 |   3)   0.540 us    |          }
+ 1179.629094 |   3)   0.175 us    |          vhost_enable_notify [vhost]();
+ 1179.629094 |   3)   1.930 us    |        }
+ 1179.645060 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.645061 |   3)   0.205 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.645061 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.645062 |   3)   0.387 us    |            vhost_get_vq_desc [vhost]();
+ 1179.645062 |   3)   0.685 us    |          }
+ 1179.645062 |   3)   0.114 us    |          vhost_enable_notify [vhost]();
+ 1179.645063 |   3)   2.627 us    |        }
+ 1179.657062 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.657062 |   0)   0.222 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.657063 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.657063 |   0)   0.522 us    |            vhost_get_vq_desc [vhost]();
+ 1179.657064 |   0)   0.861 us    |          }
+ 1179.657064 |   0)   0.124 us    |          vhost_enable_notify [vhost]();
+ 1179.657064 |   0)   2.807 us    |        }
+ 1179.669113 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.669114 |   3)   0.226 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.669114 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.669115 |   3)   0.325 us    |            vhost_get_vq_desc [vhost]();
+ 1179.669115 |   3)   0.619 us    |          }
+ 1179.669115 |   3)   0.122 us    |          vhost_enable_notify [vhost]();
+ 1179.669115 |   3)   2.632 us    |        }
+ 1179.681102 |   3)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.681103 |   3)   0.166 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.681103 |   3)               |          get_tx_bufs [vhost_net]() {
+ 1179.681103 |   3)   0.608 us    |            vhost_get_vq_desc [vhost]();
+ 1179.681104 |   3)   0.913 us    |          }
+ 1179.681104 |   3)   0.121 us    |          vhost_enable_notify [vhost]();
+ 1179.681104 |   3)   2.572 us    |        }
+ 1179.693091 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.693091 |   4)   0.217 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.693092 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.693092 |   4)   0.257 us    |            vhost_get_vq_desc [vhost]();
+ 1179.693092 |   4)   0.550 us    |          }
+ 1179.693092 |   4)   0.119 us    |          vhost_enable_notify [vhost]();
+ 1179.693093 |   4)   2.250 us    |        }
+ 1179.705104 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.705104 |   4)   0.163 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.705105 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.705105 |   4)   0.213 us    |            vhost_get_vq_desc [vhost]();
+ 1179.705105 |   4)   0.468 us    |          }
+ 1179.705105 |   4)   0.120 us    |          vhost_enable_notify [vhost]();
+ 1179.705106 |   4)   1.716 us    |        }
+ 1179.717062 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.717063 |   4)   0.206 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.717063 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.717063 |   4)   0.331 us    |            vhost_get_vq_desc [vhost]();
+ 1179.717064 |   4)   0.648 us    |          }
+ 1179.717064 |   4)   0.113 us    |          vhost_enable_notify [vhost]();
+ 1179.717064 |   4)   2.407 us    |        }
+ 1179.733195 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.733195 |   4)   0.171 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.733196 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.733196 |   4)   0.195 us    |            vhost_get_vq_desc [vhost]();
+ 1179.733196 |   4)   0.484 us    |          }
+ 1179.733196 |   4)   0.116 us    |          vhost_enable_notify [vhost]();
+ 1179.733196 |   4)   2.139 us    |        }
+ 1179.745188 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.745188 |   4)   0.167 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.745188 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.745189 |   4)   0.189 us    |            vhost_get_vq_desc [vhost]();
+ 1179.745189 |   4)   0.432 us    |          }
+ 1179.745189 |   4)   0.124 us    |          vhost_enable_notify [vhost]();
+ 1179.745189 |   4)   1.688 us    |        }
+ 1179.761068 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.761068 |   4)   0.197 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.761069 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.761069 |   4)   0.427 us    |            vhost_get_vq_desc [vhost]();
+ 1179.761070 |   4)   0.802 us    |          }
+ 1179.761070 |   4)   0.114 us    |          vhost_enable_notify [vhost]();
+ 1179.761070 |   4)   2.962 us    |        }
+ 1179.773067 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.773067 |   0)   0.155 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.773067 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.773068 |   0)   0.256 us    |            vhost_get_vq_desc [vhost]();
+ 1179.773068 |   0)   0.506 us    |          }
+ 1179.773068 |   0)   0.112 us    |          vhost_enable_notify [vhost]();
+ 1179.773068 |   0)   1.905 us    |        }
+ 1179.789065 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.789065 |   0)   0.139 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.789066 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.789066 |   0)   0.286 us    |            vhost_get_vq_desc [vhost]();
+ 1179.789066 |   0)   0.524 us    |          }
+ 1179.789066 |   0)   0.115 us    |          vhost_enable_notify [vhost]();
+ 1179.789067 |   0)   2.255 us    |        }
+ 1179.801067 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.801067 |   0)   0.141 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.801067 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.801067 |   0)   0.246 us    |            vhost_get_vq_desc [vhost]();
+ 1179.801068 |   0)   0.485 us    |          }
+ 1179.801068 |   0)   0.116 us    |          vhost_enable_notify [vhost]();
+ 1179.801068 |   0)   1.449 us    |        }
+ 1179.813067 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.813067 |   0)   0.143 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.813067 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.813067 |   0)   0.227 us    |            vhost_get_vq_desc [vhost]();
+ 1179.813068 |   0)   0.461 us    |          }
+ 1179.813068 |   0)   0.112 us    |          vhost_enable_notify [vhost]();
+ 1179.813068 |   0)   1.404 us    |        }
+ 1179.825067 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.825067 |   0)   0.133 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.825067 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.825068 |   0)   0.170 us    |            vhost_get_vq_desc [vhost]();
+ 1179.825068 |   0)   0.390 us    |          }
+ 1179.825068 |   0)   0.107 us    |          vhost_enable_notify [vhost]();
+ 1179.825068 |   0)   1.253 us    |        }
+ 1179.837132 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.837133 |   0)   0.758 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.837134 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.837135 |   0)   1.008 us    |            vhost_get_vq_desc [vhost]();
+ 1179.837136 |   0)   2.131 us    |          }
+ 1179.837137 |   0)   0.547 us    |          vhost_enable_notify [vhost]();
+ 1179.837138 |   0)   6.754 us    |        }
+ 1179.849201 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.849201 |   0)   0.162 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.849201 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.849202 |   0)   0.191 us    |            vhost_get_vq_desc [vhost]();
+ 1179.849202 |   0)   0.428 us    |          }
+ 1179.849202 |   0)   0.120 us    |          vhost_enable_notify [vhost]();
+ 1179.849202 |   0)   1.724 us    |        }
+ 1179.861074 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.861074 |   0)   0.209 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.861075 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.861075 |   0)   0.437 us    |            vhost_get_vq_desc [vhost]();
+ 1179.861075 |   0)   0.765 us    |          }
+ 1179.861076 |   0)   0.111 us    |          vhost_enable_notify [vhost]();
+ 1179.861076 |   0)   2.970 us    |        }
+ 1179.873077 |   0)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.873077 |   0)   0.202 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.873078 |   0)               |          get_tx_bufs [vhost_net]() {
+ 1179.873078 |   0)   0.385 us    |            vhost_get_vq_desc [vhost]();
+ 1179.873079 |   0)   1.018 us    |          }
+ 1179.873079 |   0)   0.106 us    |          vhost_enable_notify [vhost]();
+ 1179.873079 |   0)   3.076 us    |        }
+ ------------------------------------------
+ 0)  vhost-2-2566  =>  avahi-d-918  
+ ------------------------------------------
+
+ 1179.878390 |   0)               |  vhost_poll_wakeup [vhost]() {
+ 1179.878390 |   0)   0.188 us    |    vhost_work_queue [vhost]();
+ 1179.878391 |   0)   1.638 us    |  }
+ 1179.885107 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.885107 |   1)   0.269 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.885108 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1179.885108 |   1)   0.459 us    |            vhost_get_vq_desc [vhost]();
+ 1179.885109 |   1)   0.765 us    |          }
+ 1179.885109 |   1)   0.118 us    |          vhost_enable_notify [vhost]();
+ 1179.885109 |   1)   3.515 us    |        }
+ ------------------------------------------
+ 2)  CPU 0/K-2569  =>  vhost-2-2566 
+ ------------------------------------------
+
+ 1179.897103 |   2)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.897116 |   2)   0.303 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.897117 |   2)               |          get_tx_bufs [vhost_net]() {
+ 1179.897117 |   2)   0.459 us    |            vhost_get_vq_desc [vhost]();
+ 1179.897118 |   2)   0.744 us    |          }
+ 1179.897118 |   2)   0.111 us    |          vhost_enable_notify [vhost]();
+ 1179.897118 |   2) + 16.232 us   |        }
+ 1179.909104 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.909104 |   4)   0.280 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.909105 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.909105 |   4)   0.444 us    |            vhost_get_vq_desc [vhost]();
+ 1179.909106 |   4)   0.903 us    |          }
+ 1179.909106 |   4)   0.122 us    |          vhost_enable_notify [vhost]();
+ 1179.909106 |   4)   3.174 us    |        }
+ 1179.921114 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.921115 |   4)   0.207 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.921115 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.921115 |   4)   0.488 us    |            vhost_get_vq_desc [vhost]();
+ 1179.921116 |   4)   0.740 us    |          }
+ 1179.921116 |   4)   0.118 us    |          vhost_enable_notify [vhost]();
+ 1179.921116 |   4)   2.459 us    |        }
+ 1179.933112 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.933113 |   4)   0.153 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.933113 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.933113 |   4)   0.231 us    |            vhost_get_vq_desc [vhost]();
+ 1179.933113 |   4)   0.489 us    |          }
+ 1179.933113 |   4)   0.125 us    |          vhost_enable_notify [vhost]();
+ 1179.933114 |   4)   1.779 us    |        }
+ 1179.945214 |   4)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.945215 |   4)   0.213 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.945215 |   4)               |          get_tx_bufs [vhost_net]() {
+ 1179.945215 |   4)   0.349 us    |            vhost_get_vq_desc [vhost]();
+ 1179.945216 |   4)   0.723 us    |          }
+ 1179.945216 |   4)   0.121 us    |          vhost_enable_notify [vhost]();
+ 1179.945216 |   4)   2.833 us    |        }
+ 1179.957109 |   2)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.957110 |   2)   0.254 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.957110 |   2)               |          get_tx_bufs [vhost_net]() {
+ 1179.957110 |   2)   0.431 us    |            vhost_get_vq_desc [vhost]();
+ 1179.957111 |   2)   0.826 us    |          }
+ 1179.957111 |   2)   0.122 us    |          vhost_enable_notify [vhost]();
+ 1179.957111 |   2)   3.094 us    |        }
+ 1179.969116 |   5)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.969117 |   5)   0.498 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.969118 |   5)               |          get_tx_bufs [vhost_net]() {
+ 1179.969118 |   5)   1.202 us    |            vhost_get_vq_desc [vhost]();
+ 1179.969119 |   5)   1.499 us    |          }
+ 1179.969119 |   5)   0.113 us    |          vhost_enable_notify [vhost]();
+ 1179.969119 |   5)   5.098 us    |        }
+ 1179.985108 |   5)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.985108 |   5)   0.192 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.985109 |   5)               |          get_tx_bufs [vhost_net]() {
+ 1179.985109 |   5)   0.537 us    |            vhost_get_vq_desc [vhost]();
+ 1179.985110 |   5)   0.873 us    |          }
+ 1179.985110 |   5)   0.104 us    |          vhost_enable_notify [vhost]();
+ 1179.985110 |   5)   2.831 us    |        }
+ 1179.997091 |   5)               |        handle_tx_zerocopy [vhost_net]() {
+ 1179.997091 |   5)   0.309 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1179.997092 |   5)               |          get_tx_bufs [vhost_net]() {
+ 1179.997092 |   5)   0.635 us    |            vhost_get_vq_desc [vhost]();
+ 1179.997093 |   5)   0.964 us    |          }
+ 1179.997093 |   5)   0.117 us    |          vhost_enable_notify [vhost]();
+ 1179.997093 |   5)   3.721 us    |        }
+ 1180.009087 |   5)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.009088 |   5)   0.204 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.009088 |   5)               |          get_tx_bufs [vhost_net]() {
+ 1180.009088 |   5)   0.576 us    |            vhost_get_vq_desc [vhost]();
+ 1180.009089 |   5)   0.893 us    |          }
+ 1180.009089 |   5)   0.114 us    |          vhost_enable_notify [vhost]();
+ 1180.009089 |   5)   3.528 us    |        }
+ 1180.025086 |   5)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.025087 |   5)   0.183 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.025087 |   5)               |          get_tx_bufs [vhost_net]() {
+ 1180.025087 |   5)   0.543 us    |            vhost_get_vq_desc [vhost]();
+ 1180.025088 |   5)   0.855 us    |          }
+ 1180.025088 |   5)   0.368 us    |          vhost_enable_notify [vhost]();
+ 1180.025089 |   5)   3.119 us    |        }
+ 1180.037088 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.037089 |   1)   0.268 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.037090 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.037090 |   1)   0.454 us    |            vhost_get_vq_desc [vhost]();
+ 1180.037091 |   1)   0.772 us    |          }
+ 1180.037091 |   1)   0.120 us    |          vhost_enable_notify [vhost]();
+ 1180.037091 |   1)   3.978 us    |        }
+ 1180.049087 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.049088 |   1)   0.181 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.049088 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.049089 |   1)   0.517 us    |            vhost_get_vq_desc [vhost]();
+ 1180.049089 |   1)   0.942 us    |          }
+ 1180.049089 |   1)   0.116 us    |          vhost_enable_notify [vhost]();
+ 1180.049090 |   1)   3.809 us    |        }
+ 1180.061128 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.061128 |   1)   0.225 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.061129 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.061129 |   1)   0.452 us    |            vhost_get_vq_desc [vhost]();
+ 1180.061130 |   1)   0.754 us    |          }
+ 1180.061130 |   1)   0.124 us    |          vhost_enable_notify [vhost]();
+ 1180.061130 |   1)   3.297 us    |        }
+ 1180.073121 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.073122 |   1)   0.240 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.073122 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.073122 |   1)   0.470 us    |            vhost_get_vq_desc [vhost]();
+ 1180.073123 |   1)   0.764 us    |          }
+ 1180.073123 |   1)   0.123 us    |          vhost_enable_notify [vhost]();
+ 1180.073123 |   1)   4.109 us    |        }
+ 1180.085124 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.085125 |   1)   0.208 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.085125 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.085125 |   1)   0.382 us    |            vhost_get_vq_desc [vhost]();
+ 1180.085126 |   1)   0.685 us    |          }
+ 1180.085126 |   1)   0.121 us    |          vhost_enable_notify [vhost]();
+ 1180.085126 |   1)   3.147 us    |        }
+ 1180.101096 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.101097 |   1)   0.230 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.101097 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.101097 |   1)   0.506 us    |            vhost_get_vq_desc [vhost]();
+ 1180.101098 |   1)   0.817 us    |          }
+ 1180.101098 |   1)   0.115 us    |          vhost_enable_notify [vhost]();
+ 1180.101098 |   1)   3.683 us    |        }
+ 1180.113092 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.113093 |   1)   0.197 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.113094 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.113094 |   1)   0.505 us    |            vhost_get_vq_desc [vhost]();
+ 1180.113094 |   1)   0.858 us    |          }
+ 1180.113095 |   1)   0.115 us    |          vhost_enable_notify [vhost]();
+ 1180.113095 |   1)   3.613 us    |        }
+ 1180.125092 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.125093 |   1)   0.180 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.125093 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.125093 |   1)   0.496 us    |            vhost_get_vq_desc [vhost]();
+ 1180.125094 |   1)   0.808 us    |          }
+ 1180.125094 |   1)   0.370 us    |          vhost_enable_notify [vhost]();
+ 1180.125095 |   1)   3.699 us    |        }
+ 1180.137091 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.137092 |   1)   0.270 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.137093 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.137093 |   1)   0.517 us    |            vhost_get_vq_desc [vhost]();
+ 1180.137094 |   1)   0.861 us    |          }
+ 1180.137094 |   1)   0.113 us    |          vhost_enable_notify [vhost]();
+ 1180.137094 |   1)   3.400 us    |        }
+ 1180.149093 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.149093 |   1)   0.339 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.149094 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.149094 |   1)   0.544 us    |            vhost_get_vq_desc [vhost]();
+ 1180.149095 |   1)   0.922 us    |          }
+ 1180.149095 |   1)   0.110 us    |          vhost_enable_notify [vhost]();
+ 1180.149095 |   1)   3.420 us    |        }
+ 1180.161093 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.161094 |   1)   0.155 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.161094 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.161095 |   1)   0.531 us    |            vhost_get_vq_desc [vhost]();
+ 1180.161095 |   1)   1.216 us    |          }
+ 1180.161095 |   1)   0.397 us    |          vhost_enable_notify [vhost]();
+ 1180.161096 |   1)   3.452 us    |        }
+ 1180.173121 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.173122 |   1)   0.193 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.173123 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.173123 |   1)   0.454 us    |            vhost_get_vq_desc [vhost]();
+ 1180.173124 |   1)   0.791 us    |          }
+ 1180.173124 |   1)   0.107 us    |          vhost_enable_notify [vhost]();
+ 1180.173124 |   1)   4.099 us    |        }
+ 1180.185127 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.185128 |   1)   0.239 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.185129 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.185129 |   1)   0.527 us    |            vhost_get_vq_desc [vhost]();
+ 1180.185130 |   1)   0.828 us    |          }
+ 1180.185130 |   1)   0.117 us    |          vhost_enable_notify [vhost]();
+ 1180.185130 |   1)   3.411 us    |        }
+ ------------------------------------------
+ 0)  avahi-d-918   =>  CPU 2/K-2575 
+ ------------------------------------------
+
+ 1180.191278 |   0)               |  vhost_poll_wakeup [vhost]() {
+ 1180.191280 |   0)   6.997 us    |    vhost_work_queue [vhost]();
+ 1180.191288 |   0) + 10.151 us   |  }
+ 1180.197161 |   1)               |        handle_tx_zerocopy [vhost_net]() {
+ 1180.197162 |   1)   0.562 us    |          vhost_zerocopy_signal_used [vhost_net]();
+ 1180.197163 |   1)               |          get_tx_bufs [vhost_net]() {
+ 1180.197164 |   1)               |            vhost_get_vq_desc [vhost]() {
+ 1180.197165 |   1)   0.972 us    |              translate_desc [vhost]();

@@ -33,18 +33,6 @@
 #include <linux/nospec.h>
 
 #include "vhost.h"
-//juyoung test header start
-//
-//
-#include <linux/time.h>
-struct timespec mycheckpoint;
-
-//juyoung test header end
-
-
-
-
-
 
 static ushort max_mem_regions = 64;
 module_param(max_mem_regions, ushort, 0444);
@@ -268,11 +256,8 @@ EXPORT_SYMBOL_GPL(vhost_poll_flush);
 
 void vhost_work_queue(struct vhost_dev *dev, struct vhost_work *work)
 {
-	if (!dev->worker){
-		getnstimeofday(&mycheckpoint);
-		printk("@@vhost_work_queue@@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
+	if (!dev->worker)
 		return;
-	}
 
 	if (!test_and_set_bit(VHOST_WORK_QUEUED, &work->flags)) {
 		/* We can only add the work to the list after we're
@@ -282,8 +267,6 @@ void vhost_work_queue(struct vhost_dev *dev, struct vhost_work *work)
 		llist_add(&work->node, &dev->work_list);
 		wake_up_process(dev->worker);
 	}
-	getnstimeofday(&mycheckpoint);
-	printk("@@vhost_work_queue@@ sec: %ld, nsec: %ld\n", mycheckpoint.tv_sec, mycheckpoint.tv_nsec);
 }
 EXPORT_SYMBOL_GPL(vhost_work_queue);
 
@@ -2526,11 +2509,13 @@ EXPORT_SYMBOL_GPL(vhost_dequeue_msg);
 
 static int __init vhost_init(void)
 {
+	printk(KERN_ALERT "Hello, kernel Im edited vhost\n");
 	return 0;
 }
 
 static void __exit vhost_exit(void)
 {
+	printk(KERN_ALERT "Good bye, kernel Im edited vhost\n");
 }
 
 module_init(vhost_init);

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-2.0
 obj-m = vhost_net.o
 vhost_net-y := net.o
 
@@ -8,6 +9,9 @@ default:
 clean:
 	rm -rf *.mod.*
 	rm -rf *.o*
-	rm -rf *.ko
+	rm -rf *.ko*
 	rm -rf *.order
 	rm -rf *.symvers
+	rm -rf .net*
+	rm -rf .vhost*
+	rm -rf .tmp_*
