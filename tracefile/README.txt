@@ -29,7 +29,11 @@ function description
 0)   0.105 us    |          vhost_poll_stop [vhost](); // stop polling a file.
                           }
 0)               |        handle_tx_zerocopy [vhost_net]() {  //socket zero copy : 디스크에서 소켓을 효율적으로 데이터복사하는 방법
+<<<<<<< HEAD
 0)   0.112 us    |          vhost_zerocopy_signal_used [vhost_net](); 			//반복 시작 /* Release DMAs done buffers first */
+=======
+0)   0.112 us    |          vhost_zerocopy_signal_used [vhost_net](); 			//반복 시작 /* Release DMAs done buffers first */ 	DMAs done buffers 풀어줌
+>>>>>>> f246e21809745564aece7b7a5e8dcee442520631
 0)               |          get_tx_bufs [vhost_net]() {
                               vhost_net_tx_get_vq_desc() {
 0)               |              vhost_get_vq_desc [vhost]() {//이것은 virtqueue와 사용 가능한 첫 번째 버퍼로 보이고, 편리한 접근을 위해 그것을 iovec로 변환한다.  
@@ -110,6 +114,12 @@ tcp 통신에서 비효율적인구조 발견 (190815_3 중간 부분 참고)
 
 
 구조
+<<<<<<< HEAD
+=======
+
+kthread -> vhost_worker -> handle_tx_kick -> handle_tx -> handle_tx_zerocopy
+
+>>>>>>> f246e21809745564aece7b7a5e8dcee442520631
 handle_rx {
  mutex_lock_nested(&vq->mutex, VHOST_NET_VQ_RX);
  if (!sock)
