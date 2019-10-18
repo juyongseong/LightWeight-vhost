@@ -163,7 +163,7 @@ handle_rx {
  2)   0.362 us    |      }
  2)   0.568 us    |    }
  2)   1.461 us    |  }
-handle_rx_net [vhost_net]() {
+4313371.298157 |   0)               |    handle_rx_net [vhost_net]() {
 4313371.298157 |   0)               |      handle_rx [vhost_net]() {
 4313371.298157 |   0)   0.101 us    |        vq_iotlb_prefetch [vhost]();
 4313371.298158 |   0)   0.102 us    |        vhost_disable_notify [vhost]();
