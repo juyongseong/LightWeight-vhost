@@ -1,0 +1,356 @@
+@@2019년   06월 13일 15 시  29 분  59 초에 출력된 결과입니다.
+@time : 10, size : 64
+@@@@@@vm@@@@@@
+@@@@@@vm@@@@@@
+@vm1 stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '3542':
+
+          6,907.58 msec task-clock                #    0.691 CPUs utilized          
+           136,524      context-switches          #    0.020 M/sec                  
+               337      cpu-migrations            #    0.049 K/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     4,658,344,289      cycles                    #    0.674 GHz                    
+     2,502,268,996      instructions              #    0.54  insn per cycle         
+       516,461,407      branches                  #   74.767 M/sec                  
+        15,707,356      branch-misses             #    3.04% of all branches        
+       756,467,722      L1-dcache-loads           #  109.513 M/sec                  
+        96,646,190      L1-dcache-load-misses     #   12.78% of all L1-dcache hits  
+        26,540,033      LLC-loads                 #    3.842 M/sec                  
+           702,885      LLC-load-misses           #    2.65% of all LL-cache hits   
+
+      10.003701554 seconds time elapsed
+
+@vm2 stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '3966':
+
+          6,866.89 msec task-clock                #    0.686 CPUs utilized          
+           121,168      context-switches          #    0.018 M/sec                  
+               178      cpu-migrations            #    0.026 K/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     4,817,777,683      cycles                    #    0.702 GHz                    
+     2,409,375,483      instructions              #    0.50  insn per cycle         
+       495,132,738      branches                  #   72.104 M/sec                  
+        15,367,032      branch-misses             #    3.10% of all branches        
+       727,384,544      L1-dcache-loads           #  105.926 M/sec                  
+        94,805,788      L1-dcache-load-misses     #   13.03% of all L1-dcache hits  
+        29,098,639      LLC-loads                 #    4.238 M/sec                  
+           639,745      LLC-load-misses           #    2.20% of all LL-cache hits   
+
+      10.009534262 seconds time elapsed
+
+@vm3 stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '4070':
+
+          6,306.63 msec task-clock                #    0.630 CPUs utilized          
+           172,130      context-switches          #    0.027 M/sec                  
+                99      cpu-migrations            #    0.016 K/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     4,243,043,884      cycles                    #    0.673 GHz                    
+     2,479,096,542      instructions              #    0.58  insn per cycle         
+       509,676,360      branches                  #   80.816 M/sec                  
+        14,385,899      branch-misses             #    2.82% of all branches        
+       743,802,693      L1-dcache-loads           #  117.940 M/sec                  
+        98,151,577      L1-dcache-load-misses     #   13.20% of all L1-dcache hits  
+        23,384,111      LLC-loads                 #    3.708 M/sec                  
+           558,838      LLC-load-misses           #    2.39% of all LL-cache hits   
+
+      10.005432346 seconds time elapsed
+
+@vm4 stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '4184':
+
+          7,066.16 msec task-clock                #    0.706 CPUs utilized          
+           159,801      context-switches          #    0.023 M/sec                  
+               319      cpu-migrations            #    0.045 K/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     4,863,547,561      cycles                    #    0.688 GHz                    
+     2,504,990,469      instructions              #    0.52  insn per cycle         
+       512,333,535      branches                  #   72.505 M/sec                  
+        16,417,669      branch-misses             #    3.20% of all branches        
+       757,832,943      L1-dcache-loads           #  107.248 M/sec                  
+        95,681,285      L1-dcache-load-misses     #   12.63% of all L1-dcache hits  
+        30,267,138      LLC-loads                 #    4.283 M/sec                  
+           849,985      LLC-load-misses           #    2.81% of all LL-cache hits   
+
+      10.002411862 seconds time elapsed
+
+@vm5 stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '4294':
+
+          7,635.03 msec task-clock                #    0.763 CPUs utilized          
+           112,725      context-switches          #    0.015 M/sec                  
+               228      cpu-migrations            #    0.030 K/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     4,764,050,228      cycles                    #    0.624 GHz                    
+     2,724,241,444      instructions              #    0.57  insn per cycle         
+       571,695,120      branches                  #   74.878 M/sec                  
+        17,654,218      branch-misses             #    3.09% of all branches        
+       836,526,319      L1-dcache-loads           #  109.564 M/sec                  
+        85,699,922      L1-dcache-load-misses     #   10.24% of all L1-dcache hits  
+        25,638,649      LLC-loads                 #    3.358 M/sec                  
+           660,559      LLC-load-misses           #    2.58% of all LL-cache hits   
+
+      10.004621587 seconds time elapsed
+
+@vm6 stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '4399':
+
+          6,931.12 msec task-clock                #    0.693 CPUs utilized          
+           156,567      context-switches          #    0.023 M/sec                  
+               225      cpu-migrations            #    0.032 K/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     4,310,999,424      cycles                    #    0.622 GHz                    
+     2,455,470,731      instructions              #    0.57  insn per cycle         
+       504,932,155      branches                  #   72.850 M/sec                  
+        14,929,616      branch-misses             #    2.96% of all branches        
+       741,482,935      L1-dcache-loads           #  106.979 M/sec                  
+        95,537,106      L1-dcache-load-misses     #   12.88% of all L1-dcache hits  
+        25,074,874      LLC-loads                 #    3.618 M/sec                  
+           605,925      LLC-load-misses           #    2.42% of all LL-cache hits   
+
+      10.004448363 seconds time elapsed
+
+@@@@@@vhost@@@@@@
+@@@@@@vhost@@@@@@
+@vm1 vhost stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '3561':
+
+            978.76 msec task-clock                #    0.098 CPUs utilized          
+           159,281      context-switches          #    0.163 M/sec                  
+               874      cpu-migrations            #    0.893 K/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     3,009,438,494      cycles                    #    3.075 GHz                    
+     3,115,848,740      instructions              #    1.04  insn per cycle         
+       588,292,866      branches                  #  601.057 M/sec                  
+        11,040,120      branch-misses             #    1.88% of all branches        
+       889,445,997      L1-dcache-loads           #  908.744 M/sec                  
+        61,251,422      L1-dcache-load-misses     #    6.89% of all L1-dcache hits  
+        17,335,872      LLC-loads                 #   17.712 M/sec                  
+           385,444      LLC-load-misses           #    2.22% of all LL-cache hits   
+
+      10.004506239 seconds time elapsed
+
+@vm2 vhost stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '3979':
+
+            977.76 msec task-clock                #    0.098 CPUs utilized          
+           160,771      context-switches          #    0.164 M/sec                  
+               712      cpu-migrations            #    0.728 K/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     3,005,032,856      cycles                    #    3.073 GHz                    
+     3,151,722,555      instructions              #    1.05  insn per cycle         
+       593,447,644      branches                  #  606.948 M/sec                  
+        10,795,476      branch-misses             #    1.82% of all branches        
+       897,851,346      L1-dcache-loads           #  918.277 M/sec                  
+        62,918,045      L1-dcache-load-misses     #    7.01% of all L1-dcache hits  
+        16,882,386      LLC-loads                 #   17.266 M/sec                  
+           347,616      LLC-load-misses           #    2.06% of all LL-cache hits   
+
+      10.016617368 seconds time elapsed
+
+@vm3 vhost stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '4092':
+
+          1,192.08 msec task-clock                #    0.119 CPUs utilized          
+           231,459      context-switches          #    0.194 M/sec                  
+               659      cpu-migrations            #    0.553 K/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     3,435,092,537      cycles                    #    2.882 GHz                    
+     3,710,998,426      instructions              #    1.08  insn per cycle         
+       706,271,970      branches                  #  592.471 M/sec                  
+        13,306,191      branch-misses             #    1.88% of all branches        
+     1,065,858,528      L1-dcache-loads           #  894.118 M/sec                  
+        77,534,800      L1-dcache-load-misses     #    7.27% of all L1-dcache hits  
+        17,945,929      LLC-loads                 #   15.054 M/sec                  
+           305,336      LLC-load-misses           #    1.70% of all LL-cache hits   
+
+      10.000797714 seconds time elapsed
+
+@vm4 vhost stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '4204':
+
+            950.85 msec task-clock                #    0.095 CPUs utilized          
+           167,043      context-switches          #    0.176 M/sec                  
+               640      cpu-migrations            #    0.673 K/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     2,848,941,791      cycles                    #    2.996 GHz                    
+     2,861,138,496      instructions              #    1.00  insn per cycle         
+       541,163,058      branches                  #  569.136 M/sec                  
+        10,460,648      branch-misses             #    1.93% of all branches        
+       820,598,117      L1-dcache-loads           #  863.015 M/sec                  
+        57,372,374      L1-dcache-load-misses     #    6.99% of all L1-dcache hits  
+        16,540,253      LLC-loads                 #   17.395 M/sec                  
+           274,450      LLC-load-misses           #    1.66% of all LL-cache hits   
+
+      10.001519131 seconds time elapsed
+
+@vm5 vhost stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '4310':
+
+            992.09 msec task-clock                #    0.099 CPUs utilized          
+           158,269      context-switches          #    0.160 M/sec                  
+             1,121      cpu-migrations            #    0.001 M/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     3,064,489,137      cycles                    #    3.089 GHz                    
+     3,246,844,681      instructions              #    1.06  insn per cycle         
+       610,981,344      branches                  #  615.854 M/sec                  
+        11,148,860      branch-misses             #    1.82% of all branches        
+       924,175,753      L1-dcache-loads           #  931.546 M/sec                  
+        62,893,045      L1-dcache-load-misses     #    6.81% of all L1-dcache hits  
+        17,309,842      LLC-loads                 #   17.448 M/sec                  
+           382,448      LLC-load-misses           #    2.21% of all LL-cache hits   
+
+      10.001460178 seconds time elapsed
+
+@vm6 vhost stat
+# started on Thu Jun 13 15:29:44 2019
+
+
+ Performance counter stats for process id '4424':
+
+          1,026.76 msec task-clock                #    0.103 CPUs utilized          
+           177,454      context-switches          #    0.173 M/sec                  
+               685      cpu-migrations            #    0.667 K/sec                  
+                 0      page-faults               #    0.000 K/sec                  
+     3,106,103,157      cycles                    #    3.025 GHz                    
+     3,305,989,603      instructions              #    1.06  insn per cycle         
+       625,968,211      branches                  #  609.655 M/sec                  
+        11,465,075      branch-misses             #    1.83% of all branches        
+       945,523,729      L1-dcache-loads           #  920.883 M/sec                  
+        63,534,561      L1-dcache-load-misses     #    6.72% of all L1-dcache hits  
+        16,705,682      LLC-loads                 #   16.270 M/sec                  
+           418,044      LLC-load-misses           #    2.50% of all LL-cache hits   
+
+      10.000684855 seconds time elapsed
+
+@@@@@@netperf@@@@@@
+@@@@@@netperf@@@@@@
+@vm1 netperf
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    10.00     518.42   
+@vm2 netperf
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    10.00     547.53   
+@vm3 netperf
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    10.00     525.28   
+@vm4 netperf
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    10.01     455.04   
+@vm5 netperf
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    10.00     607.78   
+@vm6 netperf
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    10.00     578.22   
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Summary@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Summary@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Summary@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Summary@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@2019년   06월 13일 15 시  29 분  59 초에 출력된 결과입니다.
+@time : 10, size : 64
+@@@@@@vm@@@@@@
+@@@@@@vm@@@@@@
+@vm1 stat
+          6,907.58 msec task-clock                #    0.691 CPUs utilized          
+@vm2 stat
+          6,866.89 msec task-clock                #    0.686 CPUs utilized          
+@vm3 stat
+          6,306.63 msec task-clock                #    0.630 CPUs utilized          
+@vm4 stat
+          7,066.16 msec task-clock                #    0.706 CPUs utilized          
+@vm5 stat
+          7,635.03 msec task-clock                #    0.763 CPUs utilized          
+@vm6 stat
+          6,931.12 msec task-clock                #    0.693 CPUs utilized          
+@@@@@@vhost@@@@@@
+@@@@@@vhost@@@@@@
+@vm1 vhost stat
+            978.76 msec task-clock                #    0.098 CPUs utilized          
+@vm2 vhost stat
+            977.76 msec task-clock                #    0.098 CPUs utilized          
+@vm3 vhost stat
+          1,192.08 msec task-clock                #    0.119 CPUs utilized          
+@vm4 vhost stat
+            950.85 msec task-clock                #    0.095 CPUs utilized          
+@vm5 vhost stat
+            992.09 msec task-clock                #    0.099 CPUs utilized          
+@vm6 vhost stat
+          1,026.76 msec task-clock                #    0.103 CPUs utilized          
+@@@@@@netperf@@@@@@
+@@@@@@netperf@@@@@@
+@vm1 netperf
+ 87380  16384     64    10.00     518.42   
+@vm2 netperf
+ 87380  16384     64    10.00     547.53   
+@vm3 netperf
+ 87380  16384     64    10.00     525.28   
+@vm4 netperf
+ 87380  16384     64    10.01     455.04   
+@vm5 netperf
+ 87380  16384     64    10.00     607.78   
+@vm6 netperf
+ 87380  16384     64    10.00     578.22   
