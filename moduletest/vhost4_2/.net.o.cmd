@@ -1311,6 +1311,7 @@ deps_/home/jy-os/lab/LightWeight-vhost/moduletest/vhost4_2/net.o := \
   include/linux/ptr_ring.h \
   /home/jy-os/lab/LightWeight-vhost/moduletest/vhost4_2/vhost.h \
     $(wildcard include/config/vhost/cross/endian/legacy.h) \
+  include/linux/proc_fs.h \
 
 /home/jy-os/lab/LightWeight-vhost/moduletest/vhost4_2/net.o: $(deps_/home/jy-os/lab/LightWeight-vhost/moduletest/vhost4_2/net.o)
 

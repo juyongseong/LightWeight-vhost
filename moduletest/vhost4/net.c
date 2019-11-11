@@ -36,15 +36,15 @@
 
 #include "vhost.h"
 
-#include <linux/delay.h>
-
 static int experimental_zcopytx = 1;
 module_param(experimental_zcopytx, int, 0444);
 MODULE_PARM_DESC(experimental_zcopytx, "Enable Zero Copy TX;"
 		                       " 1 -Enable; 0 - Disable");
 
-/* mytest int test*/
-int mytest = 1;
+
+
+/* It is only code that i eddited all of this net.c */
+int mytest =1;
 
 /* Max number of bytes transferred before requeueing the job.
  * Using this limit prevents one virtqueue from starving others. */
@@ -899,7 +899,6 @@ static void handle_tx_zerocopy(struct vhost_net *net, struct socket *sock)
 				vhost_disable_notify(&net->dev, vq);
 				continue;
 			}
-			mytest=1;
 			break;
 		}
 
@@ -971,30 +970,22 @@ static void handle_tx(struct vhost_net *net)
 	struct vhost_net_virtqueue *nvq = &net->vqs[VHOST_NET_VQ_TX];
 	struct vhost_virtqueue *vq = &nvq->vq;
 	struct socket *sock;
-	mytest=1;
-	int testcount=3;
-	while(mytest==1) {
-		mytest=0;
-	
-		mutex_lock_nested(&vq->mutex, VHOST_NET_VQ_TX);
-		sock = vq->private_data;
-		if (!sock)
-			goto out;
 
-		if (!vq_iotlb_prefetch(vq))
-			goto out;
+	mutex_lock_nested(&vq->mutex, VHOST_NET_VQ_TX);
+	sock = vq->private_data;
+	if (!sock)
+		goto out;
 
-		vhost_disable_notify(&net->dev, vq);
-		vhost_net_disable_vq(net, vq);
+	if (!vq_iotlb_prefetch(vq))
+		goto out;
 
-		if (vhost_sock_zcopy(sock))
-			handle_tx_zerocopy(net, sock);
-		else
-			handle_tx_copy(net, sock);
-		mutex_unlock(&vq->mutex);
-		msleep(1);
+	vhost_disable_notify(&net->dev, vq);
+	vhost_net_disable_vq(net, vq);
 
-	}
+	if (vhost_sock_zcopy(sock))
+		handle_tx_zerocopy(net, sock);
+	else
+		handle_tx_copy(net, sock);
 
 out:
 	mutex_unlock(&vq->mutex);
