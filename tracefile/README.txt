@@ -163,3 +163,26 @@ handle_rx {
  2)   0.362 us    |      }
  2)   0.568 us    |    }
  2)   1.461 us    |  }
+4313371.298157 |   0)               |    handle_rx_net [vhost_net]() {
+4313371.298157 |   0)               |      handle_rx [vhost_net]() {
+4313371.298157 |   0)   0.101 us    |        vq_iotlb_prefetch [vhost]();
+4313371.298158 |   0)   0.102 us    |        vhost_disable_notify [vhost]();
+4313371.298158 |   0)   0.146 us    |        vhost_poll_stop [vhost]();
+4313371.298158 |   0)   0.167 us    |        vhost_net_buf_peek [vhost_net]();
+4313371.298158 |   0)               |        vhost_get_vq_desc [vhost]() {
+4313371.298158 |   0)   0.110 us    |          translate_desc [vhost]();
+4313371.298159 |   0)   0.368 us    |        }
+4313371.298159 |   0)   0.112 us    |        vhost_net_buf_peek [vhost_net]();
+4313371.298160 |   0)               |        vhost_net_enable_vq [vhost_net]() {
+4313371.298160 |   0)               |          vhost_poll_start [vhost]() {
+4313371.298160 |   0)   0.121 us    |            vhost_poll_func [vhost]();
+4313371.298160 |   0)   0.401 us    |          }
+4313371.298160 |   0)   0.636 us    |        }
+4313371.298160 |   0)               |        vhost_add_used_and_signal_n [vhost]() {
+4313371.298160 |   0)               |          vhost_add_used_n [vhost]() {
+4313371.298161 |   0)   0.126 us    |            __vhost_add_used_n [vhost]();
+4313371.298161 |   0)   0.342 us    |          }
+4313371.298161 |   0)   1.182 us    |          vhost_signal [vhost]();
+4313371.298162 |   0)   1.822 us    |        }
+4313371.298162 |   0)   4.972 us    |      }
+4313371.298162 |   0)   5.179 us    |    }
