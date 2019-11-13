@@ -35,29 +35,15 @@
 #include <net/xdp.h>
 
 #include "vhost.h"
+//edited
+#include <linux/delay.h>
+
+
 
 static int experimental_zcopytx = 1;
 module_param(experimental_zcopytx, int, 0444);
 MODULE_PARM_DESC(experimental_zcopytx, "Enable Zero Copy TX;"
 		                       " 1 -Enable; 0 - Disable");
-
-
-/* Project Lightweight vHost code start*/
-#include <linux/slab.h>
-#include <linux/module.h>       
-#include <linux/seq_file.h>
-#include <linux/proc_fs.h>
-#include <linux/uaccess.h>        
-#include <linux/semaphore.h>
-#include <linux/spinlock.h>
-#include<linux/random.h>
-
-#include <linux/delay.h>
-
-int myteststatus =0;
-/*static void handle_rx(struct vhost_net *net);
-/* Project Lightweight vHost code end */
-
 
 /* Max number of bytes transferred before requeueing the job.
  * Using this limit prevents one virtqueue from starving others. */
@@ -67,6 +53,7 @@ int myteststatus =0;
  * Using this limit prevents one virtqueue from starving others with small
  * pkts.
  */
+int mytest;
 #define VHOST_NET_PKT_WEIGHT 256
 
 /* MAX number of TX used buffers for outstanding zerocopy */
@@ -891,10 +878,9 @@ static void handle_tx_zerocopy(struct vhost_net *net, struct socket *sock)
 	struct vhost_net_ubuf_ref *uninitialized_var(ubufs);
 	bool zcopy_used;
 	int sent_pkts = 0;
-
 	for (;;) {
 		bool busyloop_intr;
-
+		mytest = 0;
 		/* Release DMAs done buffers first */
 		vhost_zerocopy_signal_used(net, vq);
 
@@ -912,6 +898,7 @@ static void handle_tx_zerocopy(struct vhost_net *net, struct socket *sock)
 				vhost_disable_notify(&net->dev, vq);
 				continue;
 			}
+			mytest=1;
 			break;
 		}
 
@@ -976,14 +963,6 @@ static void handle_tx_zerocopy(struct vhost_net *net, struct socket *sock)
 	}
 }
 
-
-/* Project Lightweight vHost code start*/
-/*int myteststatus =1;*/
-int tellmestatus =0;
-static void handle_rx(struct vhost_net *net);
-/* Project Lightweight vHost code end */
-
-
 /* Expects to be always run from workqueue - which acts as
  * read-size critical section for our kind of RCU. */
 static void handle_tx(struct vhost_net *net)
@@ -991,63 +970,27 @@ static void handle_tx(struct vhost_net *net)
 	struct vhost_net_virtqueue *nvq = &net->vqs[VHOST_NET_VQ_TX];
 	struct vhost_virtqueue *vq = &nvq->vq;
 	struct socket *sock;
+
+	mutex_lock_nested(&vq->mutex, VHOST_NET_VQ_TX);
+	sock = vq->private_data;
+	if (!sock)
+		goto out;
+
+	if (!vq_iotlb_prefetch(vq))
+		goto out;
+
+	vhost_disable_notify(&net->dev, vq);
+	vhost_net_disable_vq(net, vq);
 	
-	int testcount=-1;
-	
-	if(tellmestatus != myteststatus) {
-		printk("myteststatus == %d in handle_tx \n", myteststatus);
-		tellmestatus = myteststatus;
-	}
-
-	if(myteststatus != 0)  {	/* Add likely or unlikely */
-		while(testcount && myteststatus) { /*while( 1 && myteststatus)*/
-			/*
-			if(myteststatus == 0 ) {
-				printk("myteststatus == %d \n", myteststatus);
-				myteststatus = 0;
-			}*/
-			mutex_lock_nested(&vq->mutex, VHOST_NET_VQ_TX);
-		        sock = vq->private_data;
-			if (!sock)
-			        goto out;
-
-			if (!vq_iotlb_prefetch(vq))
-		                goto out;
-
-			vhost_disable_notify(&net->dev, vq);
-		        vhost_net_disable_vq(net, vq);
-
-			if (vhost_sock_zcopy(sock))
-		                handle_tx_zerocopy(net, sock);
-		        else
-		                handle_tx_copy(net, sock);
-		        
-			mutex_unlock(&vq->mutex);
-			/*udelay(10);*/
-			usleep_range(myteststatus,myteststatus+1);
-			/*msleep(1);*/
-			handle_rx(net);
-	
-		}
-
-	} else {
-
-		mutex_lock_nested(&vq->mutex, VHOST_NET_VQ_TX);
-		sock = vq->private_data;
-		if (!sock)
-			goto out;
-
-		if (!vq_iotlb_prefetch(vq))
-			goto out;
-
-		vhost_disable_notify(&net->dev, vq);
-		vhost_net_disable_vq(net, vq);
-
-		if (vhost_sock_zcopy(sock))
+	mytest =1;
+	if (vhost_sock_zcopy(sock)) {
+		while(mytest==1) {
+			msleep(1);
 			handle_tx_zerocopy(net, sock);
-		else
-			handle_tx_copy(net, sock);
+		}
 	}
+	else
+		handle_tx_copy(net, sock);
 
 out:
 	mutex_unlock(&vq->mutex);
@@ -1887,7 +1830,7 @@ static struct miscdevice vhost_net_misc = {
 	.name = "vhost-net",
 	.fops = &vhost_net_fops,
 };
-/*
+
 static int vhost_net_init(void)
 {
 	if (experimental_zcopytx)
@@ -1908,418 +1851,3 @@ MODULE_AUTHOR("Michael S. Tsirkin");
 MODULE_DESCRIPTION("Host kernel accelerator for virtio net");
 MODULE_ALIAS_MISCDEV(VHOST_NET_MINOR);
 MODULE_ALIAS("devname:vhost-net");
-*/
-/* end of vhost code  */ 
-/* start of procfs code */
-/*
-#include <linux/slab.h>
-#include <linux/module.h>       
-#include <linux/seq_file.h>
-#include <linux/proc_fs.h>
-#include <linux/uaccess.h>        
-#include <linux/semaphore.h>
-#include <linux/spinlock.h>
-#include<linux/random.h>
-*/
-#define MAX_LEN (10)             
-#define RING_SIZE (5)
-int ringBuffer[RING_SIZE];
-short ringHead;
-short ringTail;
-short count;
-
-
-extern struct semaphore rmutex;
-extern struct semaphore wmutex;
-extern struct semaphore wrt;
-extern struct semaphore reads;
-int readcount;
-int writecount;
-DEFINE_SEMAPHORE(wmutex);
-DEFINE_SEMAPHORE(rmutex);
-DEFINE_SEMAPHORE(wrt);
-DEFINE_SEMAPHORE(reads);
-int readerCall;
-int writerCall;
-/*
-MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Youngil, Moon <jake9999@.com>");
-MODULE_DESCRIPTION("A sample driver");
-MODULE_LICENSE("Dual BSD/GPL");
-*/
-/*--------------------------------------------------------*/
-/* 1) Generate sample data    & initialize                */
-/*--------------------------------------------------------*/
-
-static void init_data(void){
-        int i;
-        ringHead=0;
-        ringTail=0;
-        count=0;
-        for(i=0;i<RING_SIZE;i++){
-                ringBuffer[i]=0;
-        }
-        
-        readcount=0;
-        writecount=0;
-
-        readerCall=0;
-        writerCall=0;
-}
-
-/*--------------------------------------------------------*/
-/* 2) proc operations part                                */
-/*--------------------------------------------------------*/
-
-static int kboard_simple_show(struct seq_file *s, void *unused)
-{ 
-        return 0;
-}
-
-static int kboard_proc_open(struct inode *inode, struct file *file)
-{
-        return single_open(file, kboard_simple_show, NULL);
-}
-
-/*--------------------------------------------------------*/
-/* 2-1) proc operations : writer                          */
-/*--------------------------------------------------------*/
-
-static int kboard_enqueue(int clip){                 //main logic for ringbuffer_write
-        if(ringHead==ringTail&&count==RING_SIZE){
-                return -1;
-        }else if(clip<0){
-                return -2;
-        }
-
-	myteststatus=clip;
-	printk(KERN_INFO "myteststatus == %d\n", myteststatus);
-
-        ringBuffer[ringHead] = clip;
-        ringHead = (ringHead+1)%RING_SIZE;
-        count++;
-
-        return 0;
-}
-
-static ssize_t do_kboard_enqueue(struct file *write, const char __user* usr, size_t len, loff_t *data){
-        unsigned long int bufSize = len;
-        char tmpBuf[MAX_LEN];
-        int clip;
-        int res;
-	
-	printk("do_kboard_enqueue\n");
-	/*myteststatus=0;*/
-        writerCall++;
-
-        if(MAX_LEN<bufSize){
-                bufSize=MAX_LEN;
-                return -2;           
-        }
-        if(copy_from_user(tmpBuf,usr,bufSize)){
-                return -3;
-        }
-        clip = simple_strtol(tmpBuf,NULL,10);            
-        
-        down(&wmutex);
-        writecount++;
-        if(writecount==1)down(&reads);
-        up(&wmutex);
-        down(&wrt);
-        res = kboard_enqueue(clip);
-        up(&wrt);
-        down(&wmutex);
-        writecount--;
-        if(writecount==0)up(&reads);
-        up(&wmutex);
-        if(res==-1){
-                return -1;
-        }else if(res==-2){
-                return -2;
-        }
-        return res;
-        
-}
-
-
-
-static int kboard_dequeue(void){               
-        int pop;
-        if(ringHead==ringTail&&count==0){
-                return -1;
-        }
-
-        pop=ringBuffer[ringTail];
-        ringTail =(ringTail+1)%RING_SIZE;
-        count--;
-        return pop;
-}
-
-static  ssize_t do_kboard_dequeue(struct file *read, char __user *usr, size_t size, loff_t *data){
-        char tmpBuf[MAX_LEN];
-        unsigned long int bufSize;
-        int res;
-
-	printk("do_kboard_dequeue\n");
-	myteststatus=0;
-	printk(KERN_INFO "myteststatus is %d \n", myteststatus);
-        writerCall++;
-
-        down(&wmutex);
-        writecount++;
-        if(writecount==1)down(&reads);
-        up(&wmutex);
-        down(&wrt);
-        res= kboard_dequeue();
-        up(&wrt);
-        down(&wmutex);
-        writecount--;
-        if(writecount==0)up(&reads);
-        up(&wmutex);
-
-        if(res==-1){
-        }
-
-        sprintf(tmpBuf,"%d",res);               
-        bufSize=sizeof(tmpBuf);
-        if(copy_to_user(usr,tmpBuf,bufSize)){         
-                return -EFAULT;
-        }
-
-        return 0;
-}
-
-/*--------------------------------------------------------*/
-/* 2-2) proc operations : reader                          */
-/*--------------------------------------------------------*/
-static int kboard_read(void){
-        int res;
-        int i;
-	
-        if(count==0&&ringHead==ringTail){
-                return -1;
-        }
-        get_random_bytes(&i,1);
-	i=i%count;
-	res=ringBuffer[(ringTail+i)%RING_SIZE];
-
-        return res;
-        
-}
-
-static ssize_t do_kboard_read(struct file *read, char __user *usr, size_t size, loff_t *data){
-        char tmpBuf[MAX_LEN];
-        unsigned long int bufSize;
-        int res;
-        printk(" do_kboard_read\n");
-	myteststatus=0;
-	printk(KERN_INFO "myteststatus is %d\n", myteststatus);
-        readerCall++;
-
-        down(&reads);
-        up(&reads);
-        down(&rmutex);
-        readcount++;
-        if(readcount==1)down(&wrt);
-        up(&rmutex);
-        res = kboard_read();
-        down(&rmutex);
-        readcount--;
-        if(readcount==0)up(&wrt);
-        up(&rmutex);
-        
-
-        if(res==-1){
-                return 0;
-        }
-        sprintf(tmpBuf,"%d",res);
-        bufSize=sizeof(tmpBuf);
-        if(copy_to_user(usr,tmpBuf,bufSize)){
-                return -EFAULT;
-        }
-        return 0;
-}
-
-/*--------------------------------------------------------*/
-/* 2-3) proc operations : file_ops                        */
-/*--------------------------------------------------------*/
-static const struct file_operations foo_proc_ops = {
-        .owner          = THIS_MODULE,
-        .open           = kboard_proc_open,
-        .read           = seq_read,
-        .llseek         = seq_lseek,
-        .release        = seq_release,
-};
-
-static const struct file_operations dequeue_proc_ops={
-        .owner          = THIS_MODULE,
-        .open           = kboard_proc_open,
-        .read           = do_kboard_dequeue,
-};
-
-static const struct file_operations enqueue_proc_ops={
-        .owner          = THIS_MODULE,
-        .open           = kboard_proc_open,
-        .write          = do_kboard_enqueue,
-};
-
-static const struct file_operations read_proc_ops={
-        .owner          = THIS_MODULE,
-        .open           = kboard_proc_open,
-        .read           = do_kboard_read,
-};
-
-/*--------------------------------------------------------*/
-/* 3) TEST perform                                           */
-/*--------------------------------------------------------*/
-
-
-static ssize_t test_kboard_read(struct file *read, char __user *usr, size_t size, loff_t *data){
-        char tmpBuf[30];
-        sprintf(tmpBuf,"reader_%d, writer_%d",readerCall,writerCall);
-        
-        if(copy_to_user(usr,tmpBuf,sizeof(tmpBuf))){
-                return -EFAULT;
-        }
-        
-        printk(KERN_DEBUG "reader_%d, writer_%d",readerCall,writerCall);
-        printk(KERN_DEBUG "");
-        
-        readerCall=0;
-        writerCall=0;
-        return 0;
-}
-static const struct file_operations test_proc_ops={
-        .owner          = THIS_MODULE,
-        .open           = kboard_proc_open,
-        .read           = test_kboard_read,
-};
-/*--------------------------------------------------------*/
-/* 4) proc interface part  (/proc/foo-dir/foo)            */
-/*--------------------------------------------------------*/
-
-#define FOO_DIR "kboard"
-#define DEQUEUE "dequeue"
-#define ENQUEUE "enqueue"
-#define RD_FILE "reader"
-
-#define TEST_FILE "testperform"
-
-static struct proc_dir_entry *kboard_proc_dir = NULL;
-static struct proc_dir_entry *dequeue_proc_file = NULL;
-static struct proc_dir_entry *equeue_proc_file=NULL;
-static struct proc_dir_entry *read_proc_file =NULL;
-
-static struct proc_dir_entry *test_proc_file =NULL; 
-
-int foo_proc_init(void)
-{
-        kboard_proc_dir = proc_mkdir(FOO_DIR, NULL);
-        if (kboard_proc_dir == NULL)
-        {
-                printk("Unable to create /proc/%s\n", FOO_DIR);
-                return -1;
-        }
-
-
-
-        dequeue_proc_file = proc_create(DEQUEUE, 0, kboard_proc_dir, &dequeue_proc_ops); /* S_IRUGO */ 
-        equeue_proc_file = proc_create(ENQUEUE,0,kboard_proc_dir,&enqueue_proc_ops);
-        read_proc_file = proc_create(RD_FILE,0,kboard_proc_dir,&read_proc_ops);
-        test_proc_file = proc_create(TEST_FILE,0,kboard_proc_dir,&test_proc_ops);
-
-        if (dequeue_proc_file == NULL)
-        {
-                printk("Unable to create /proc/%s/%s\n", FOO_DIR, DEQUEUE);
-                remove_proc_entry(FOO_DIR, NULL);
-                return -1;
-        }
-
-        if(equeue_proc_file==NULL)
-        {
-                printk("Unable to create /proc/%s/%s\n",FOO_DIR,ENQUEUE);
-                remove_proc_entry(FOO_DIR,NULL);
-                return -1;
-        }
-
-        if(read_proc_file==NULL)
-        {
-                printk("Unable to create /proc/%s/%s\n",FOO_DIR,RD_FILE);
-                remove_proc_entry(FOO_DIR,NULL);
-                return -1;
-        }
-
-        if(test_proc_file==NULL){
-                printk("Unable to create /proc/%s/%s\n",FOO_DIR,TEST_FILE);
-                remove_proc_entry(FOO_DIR,NULL);
-                return -1;        
-        }
-
-        
-        printk(KERN_INFO "Created /proc/%s/%s /proc/%s/%s\n", FOO_DIR, DEQUEUE,FOO_DIR,ENQUEUE);
-        return 0;
-}
-
-void foo_proc_exit(void)
-{
-        /* remove directory and file from procfs */
-        remove_proc_subtree(FOO_DIR, NULL);
-
-        /* remove proc_dir_entry instance */
-        proc_remove(dequeue_proc_file);
-        proc_remove(equeue_proc_file);
-        proc_remove(read_proc_file);
-        proc_remove(test_proc_file);
-        proc_remove(kboard_proc_dir);
-
-        printk(KERN_INFO "Removed /proc/%s/%s\n", FOO_DIR, DEQUEUE);
-}
-
-/*--------------------------------------------------------*/
-/* 2) Module part                                         */
-/*--------------------------------------------------------*/
-/*
-static int __init kboard_init(void)
-{
-        init_data();
-
-        return foo_proc_init();
-}
-
-static void __exit kboard_exit(void)
-{
-        foo_proc_exit();
-
-        return;
-}
-
-module_init(kboard_init);
-module_exit(kboard_exit);
-*/
-
-
-static int vhost_net_init(void)
-{
-	init_data();
-	foo_proc_init();
-
-        if (experimental_zcopytx)
-                vhost_net_enable_zcopy(VHOST_NET_VQ_TX);
-        return misc_register(&vhost_net_misc);
-}
-module_init(vhost_net_init);
-
-static void vhost_net_exit(void)
-{
-	foo_proc_exit();
-        misc_deregister(&vhost_net_misc);
-}
-module_exit(vhost_net_exit);
-
-MODULE_VERSION("0.0.1");
-MODULE_LICENSE("GPL v2");
-MODULE_AUTHOR("Michael S. Tsirkin");
-MODULE_DESCRIPTION("Host kernel accelerator for virtio net");
-MODULE_ALIAS_MISCDEV(VHOST_NET_MINOR);
-MODULE_ALIAS("devname:vhost-net");
-

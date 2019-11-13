@@ -54,7 +54,7 @@ MODULE_PARM_DESC(experimental_zcopytx, "Enable Zero Copy TX;"
 
 #include <linux/delay.h>
 
-int myteststatus =0;
+int myteststatus =1;
 /*static void handle_rx(struct vhost_net *net);
 /* Project Lightweight vHost code end */
 
@@ -992,14 +992,14 @@ static void handle_tx(struct vhost_net *net)
 	struct vhost_virtqueue *vq = &nvq->vq;
 	struct socket *sock;
 	
-	int testcount=-1;
+	int testcount=10;
 	
 	if(tellmestatus != myteststatus) {
-		printk("myteststatus == %d in handle_tx \n", myteststatus);
+		printk("myteststatus == %d \n", myteststatus);
 		tellmestatus = myteststatus;
 	}
 
-	if(myteststatus != 0)  {	/* Add likely or unlikely */
+	if(myteststatus ==1)  {	/* Add likely or unlikely */
 		while(testcount && myteststatus) { /*while( 1 && myteststatus)*/
 			/*
 			if(myteststatus == 0 ) {
@@ -1024,7 +1024,7 @@ static void handle_tx(struct vhost_net *net)
 		        
 			mutex_unlock(&vq->mutex);
 			/*udelay(10);*/
-			usleep_range(myteststatus,myteststatus+1);
+			usleep_range(800,801);
 			/*msleep(1);*/
 			handle_rx(net);
 	
@@ -1991,10 +1991,6 @@ static int kboard_enqueue(int clip){                 //main logic for ringbuffer
         }else if(clip<0){
                 return -2;
         }
-
-	myteststatus=clip;
-	printk(KERN_INFO "myteststatus == %d\n", myteststatus);
-
         ringBuffer[ringHead] = clip;
         ringHead = (ringHead+1)%RING_SIZE;
         count++;
@@ -2009,7 +2005,7 @@ static ssize_t do_kboard_enqueue(struct file *write, const char __user* usr, siz
         int res;
 	
 	printk("do_kboard_enqueue\n");
-	/*myteststatus=0;*/
+	myteststatus=0;
         writerCall++;
 
         if(MAX_LEN<bufSize){
@@ -2061,8 +2057,7 @@ static  ssize_t do_kboard_dequeue(struct file *read, char __user *usr, size_t si
         int res;
 
 	printk("do_kboard_dequeue\n");
-	myteststatus=0;
-	printk(KERN_INFO "myteststatus is %d \n", myteststatus);
+	myteststatus=1;
         writerCall++;
 
         down(&wmutex);
@@ -2113,7 +2108,6 @@ static ssize_t do_kboard_read(struct file *read, char __user *usr, size_t size, 
         int res;
         printk(" do_kboard_read\n");
 	myteststatus=0;
-	printk(KERN_INFO "myteststatus is %d\n", myteststatus);
         readerCall++;
 
         down(&reads);

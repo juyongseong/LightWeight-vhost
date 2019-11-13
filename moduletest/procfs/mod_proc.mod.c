@@ -25,7 +25,7 @@ MODULE_INFO(retpoline, "Y");
 static const char __module_depends[]
 __used
 __attribute__((section(".modinfo"))) =
-"depends=vhost,tap";
+"depends=";
 
 
-MODULE_INFO(srcversion, "D5171881CE6CD07B39F4FE0");
+MODULE_INFO(srcversion, "648D7994852A358A1E52CB1");

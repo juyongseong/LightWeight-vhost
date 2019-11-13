@@ -1,0 +1,11 @@
+#!/usr/bin/expect
+set num [lindex $argv 0];
+spawn ssh oslab@10.0.0.1$num
+expect -re "yes/no" {
+	send "yes\r"
+	exp_continue
+} -re "password: " {
+ 	send "vhost\r"
+	exp_continue
+}
+interact 	#//is that, After auto ssh login, we work terminal
