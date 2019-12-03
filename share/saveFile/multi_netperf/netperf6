@@ -1,0 +1,106 @@
+ 
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    60.00     812.29   
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    60.00     898.68   
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    60.00     845.69   
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    60.00     736.31   
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    60.00     817.36   
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.0.0.2 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384     64    60.00     824.69   
+Linux 5.1.5 (jyos-desktop) 	12/02/2019 	_x86_64_	(6 CPU)
+
+11:01:40 AM   UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+11:02:40 AM     0        42    0.00    0.02    0.00    0.00    0.02     5  ksoftirqd/5
+11:02:40 AM     0       360    0.00    0.02    0.00    0.02    0.02     2  /lib/systemd/systemd-journald 
+11:02:40 AM     0       849    0.02    0.00    0.00    0.00    0.02     2  /usr/sbin/thermald --no-daemon --dbus-enable 
+11:02:40 AM     0      1528    0.02    0.00    0.00    0.00    0.02     0  /usr/sbin/nmbd --foreground --no-process-group 
+11:02:40 AM  1000      1730    0.02    0.02    0.00    0.00    0.03     2  /usr/bin/gnome-shell 
+11:02:40 AM  1000      2006    0.10    0.00    0.00    0.00    0.10     0  /usr/lib/gnome-settings-daemon/gsd-color 
+11:02:40 AM     0     14208    0.00    0.02    0.00    0.00    0.02     2  kworker/2:1-nfsiod
+11:02:40 AM     0     24401    0.00    0.02    0.00    0.00    0.02     1  kworker/1:1-mm_percpu_wq
+11:02:40 AM     0     25001    0.00    0.03    0.00    0.00    0.03     3  kworker/u12:1-rpciod
+11:02:40 AM     0     25457    0.00    0.02    0.00    0.00    0.02     4  kworker/u12:0-events_power_efficient
+11:02:40 AM     0     25534    0.02    0.00    0.00    0.00    0.02     1  pidstat -urd -dl 60 1 
+
+11:01:40 AM   UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+11:02:40 AM     0       360      0.17      0.00   98152   16612   0.21  /lib/systemd/systemd-journald 
+11:02:40 AM     0      1184      1.68      0.00   72292    1516   0.02  /usr/sbin/sshd -D 
+11:02:40 AM     0      1288      0.03      0.00  482616   25812   0.33  /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch 
+11:02:40 AM  1000      1730      0.17      0.00 3594784   85804   1.10  /usr/bin/gnome-shell 
+11:02:40 AM  1000      2006      0.03      0.00  657184   16788   0.21  /usr/lib/gnome-settings-daemon/gsd-color 
+11:02:40 AM     0     24227      0.93      0.00   23756    4736   0.06  bash 
+11:02:40 AM     0     25534     23.35      0.00   17284    9288   0.12  pidstat -urd -dl 60 1 
+11:02:40 AM     0     25556      8.67      0.00  105956    7112   0.09  sshd: unknown [priv] 
+11:02:40 AM   122     25557      1.47      0.00   72292    3104   0.04  sshd: unknown [net]  
+
+11:01:40 AM   UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+11:02:40 AM     0       312      0.00      0.87      0.00       1  jbd2/sdb2-8
+11:02:40 AM   104       793      0.00      0.20      0.00       0  /usr/sbin/rsyslogd -n 
+11:02:40 AM     0      1184      0.00      0.27      0.00       0  /usr/sbin/sshd -D 
+11:02:40 AM     0     24227      1.80      0.20      0.00       0  bash 
+11:02:40 AM     0     25073      0.00      0.00      0.00       1  kworker/u12:4-events_power_efficient
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0        42    0.00    0.02    0.00    0.00    0.02     -  ksoftirqd/5
+Average:        0       360    0.00    0.02    0.00    0.02    0.02     -  /lib/systemd/systemd-journald 
+Average:        0       849    0.02    0.00    0.00    0.00    0.02     -  /usr/sbin/thermald --no-daemon --dbus-enable 
+Average:        0      1528    0.02    0.00    0.00    0.00    0.02     -  /usr/sbin/nmbd --foreground --no-process-group 
+Average:     1000      1730    0.02    0.02    0.00    0.00    0.03     -  /usr/bin/gnome-shell 
+Average:     1000      2006    0.10    0.00    0.00    0.00    0.10     -  /usr/lib/gnome-settings-daemon/gsd-color 
+Average:        0     14208    0.00    0.02    0.00    0.00    0.02     -  kworker/2:1-nfsiod
+Average:        0     24401    0.00    0.02    0.00    0.00    0.02     -  kworker/1:1-mm_percpu_wq
+Average:        0     25001    0.00    0.03    0.00    0.00    0.03     -  kworker/u12:1-rpciod
+Average:        0     25457    0.00    0.02    0.00    0.00    0.02     -  kworker/u12:0-events_power_efficient
+Average:        0     25534    0.02    0.00    0.00    0.00    0.02     -  pidstat -urd -dl 60 1 
+
+Average:      UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+Average:        0       360      0.17      0.00   98152   16612   0.21  /lib/systemd/systemd-journald 
+Average:        0      1184      1.68      0.00   72292    1516   0.02  /usr/sbin/sshd -D 
+Average:        0      1288      0.03      0.00  482616   25812   0.33  /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch 
+Average:     1000      1730      0.17      0.00 3594784   85804   1.10  /usr/bin/gnome-shell 
+Average:     1000      2006      0.03      0.00  657184   16788   0.21  /usr/lib/gnome-settings-daemon/gsd-color 
+Average:        0     24227      0.93      0.00   23756    4736   0.06  bash 
+Average:        0     25534     23.35      0.00   17284    9288   0.12  pidstat -urd -dl 60 1 
+Average:        0     25556      8.67      0.00  105956    7112   0.09  sshd: unknown [priv] 
+Average:      122     25557      1.47      0.00   72292    3104   0.04  sshd: unknown [net]  
+
+Average:      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+Average:        0       312      0.00      0.87      0.00       1  jbd2/sdb2-8
+Average:      104       793      0.00      0.20      0.00       0  /usr/sbin/rsyslogd -n 
+Average:        0      1184      0.00      0.27      0.00       0  /usr/sbin/sshd -D 
+Average:        0     24227      1.80      0.20      0.00       0  bash 
+Average:        0     25073      0.00      0.00      0.00       1  kworker/u12:4-events_power_efficient

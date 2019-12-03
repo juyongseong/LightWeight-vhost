@@ -82,9 +82,9 @@ static int kboard_enqueue(int clip){                 //main logic for ringbuffer
         ringBuffer[ringHead] = clip;
         ringHead = (ringHead+1)%RING_SIZE;
         count++;
-        //printk(KERN_INFO "HEAD: %d, TAIL %d, COUTNT:%d, CLIP:%d",ringHead,ringTail,count,clip);
-        //printk(KERN_INFO " ");
-
+        printk(KERN_INFO "HEAD: %d, TAIL %d, COUTNT:%d, CLIP:%d",ringHead,ringTail,count,clip);
+        printk(KERN_INFO " ");
+	printk(KERN_INFO "mytestcount = %d \n", clip);
         return 0;
 }
 
@@ -93,16 +93,16 @@ static ssize_t do_kboard_enqueue(struct file *write, const char __user* usr, siz
         char tmpBuf[MAX_LEN];
         int clip;
         int res;
-
+	printk(KERN_INFO "do_kboard_enqueue");
         writerCall++;
 
         if(MAX_LEN<bufSize){
                 bufSize=MAX_LEN;
-                //printk(KERN_INFO "INVALID DATA");
+                printk(KERN_INFO "INVALID DATA");
                 return -2;           
         }
         if(copy_from_user(tmpBuf,usr,bufSize)){
-                //printk(KERN_INFO "copy failed");
+                printk(KERN_INFO "copy failed");
                 return -3;
         }
         clip = simple_strtol(tmpBuf,NULL,10);            
@@ -119,10 +119,10 @@ static ssize_t do_kboard_enqueue(struct file *write, const char __user* usr, siz
         if(writecount==0)up(&reads);
         up(&wmutex);
         if(res==-1){
-                //printk(KERN_INFO "now ring buffer full");
+                printk(KERN_INFO "now ring buffer full");
                 return -1;
         }else if(res==-2){
-                //printk(KERN_INFO "invalid data");
+                printk(KERN_INFO "invalid data");
                 return -2;
         }
         return res;
@@ -140,8 +140,9 @@ static int kboard_dequeue(void){                   //main logic for ringbuffer_r
         pop=ringBuffer[ringTail];
         ringTail =(ringTail+1)%RING_SIZE;
         count--;
-        //printk(KERN_INFO "HEAD: %d, TAIL %d, COUTNT:%d POP:%d",ringHead,ringTail,count,pop);
-        //printk(KERN_INFO " ");
+        printk(KERN_INFO "HEAD: %d, TAIL %d, COUTNT:%d POP:%d",ringHead,ringTail,count,pop);
+        printk(KERN_INFO " ");
+	printk(KERN_INFO "mytestcount == 0 haha ");
         return pop;
 }
 
@@ -151,6 +152,7 @@ static  ssize_t do_kboard_dequeue(struct file *read, char __user *usr, size_t si
         int res;
 
         writerCall++;
+	printk(KERN_INFO "do_kboard_dequeue");
 
         down(&wmutex);
         writecount++;
@@ -165,13 +167,13 @@ static  ssize_t do_kboard_dequeue(struct file *read, char __user *usr, size_t si
         up(&wmutex);
 
         if(res==-1){
-                //printk(KERN_INFO "now ring buffer empty");
+                printk(KERN_INFO "now ring buffer empty");
         }
 
         sprintf(tmpBuf,"%d",res);               
         bufSize=sizeof(tmpBuf);
         if(copy_to_user(usr,tmpBuf,bufSize)){                   //이 부분에서 유저 영역으로 전달이 안된다.. 어쩔수 없는듯? 
-                //printk(KERN_INFO "ERR: COPY TO USER");
+                printk(KERN_INFO "ERR: COPY TO USER");
                 return -EFAULT;
         }
 
@@ -203,6 +205,7 @@ static ssize_t do_kboard_read(struct file *read, char __user *usr, size_t size, 
         int res;
         
         readerCall++;
+	printk(KERN_INFO "do_kboard_read");
 
         down(&reads);
         up(&reads);
@@ -218,13 +221,13 @@ static ssize_t do_kboard_read(struct file *read, char __user *usr, size_t size, 
         
 
         if(res==-1){
-                //printk(KERN_INFO "now ring buffer empty");
+                printk(KERN_INFO "now ring buffer empty");
                 return 0;
         }
         sprintf(tmpBuf,"%d",res);
         bufSize=sizeof(tmpBuf);
         if(copy_to_user(usr,tmpBuf,bufSize)){
-                //printk(KERN_INFO "ERR: COPY TO USER");
+                printk(KERN_INFO "ERR: COPY TO USER");
                 return -EFAULT;
         }
         return 0;
@@ -269,7 +272,7 @@ static ssize_t test_kboard_read(struct file *read, char __user *usr, size_t size
         sprintf(tmpBuf,"reader_%d, writer_%d",readerCall,writerCall);
         
         if(copy_to_user(usr,tmpBuf,sizeof(tmpBuf))){
-                //printk(KERN_DEBUG "test_kboard_read err: copy to user");
+                printk(KERN_DEBUG "test_kboard_read err: copy to user");
                 return -EFAULT;
         }
         
