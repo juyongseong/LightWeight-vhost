@@ -3,12 +3,18 @@
 ### [NetAP: Adaptive Polling Technique for Network Packet Processing in Virtualized Environments](https://www.mdpi.com/2076-3417/10/15/5219)
 --- 
 
+클라우드 네트워크 사용중 비이성적인 구조 발견 -> 데이터가 많을 수록 -> 구조가 개선될 수 있지 않을까?.. -> 네트워크 구조 확인 및 실험 시작
+
+운영체제 : ubuntu 18.04 LTS, linux-5.1.5
+
+
+
 폴더 설명
-1. share is record
+1. share : 리눅스 컴퓨터 간 자료 공유 목적
 
-2. shfile is .sh file
+2. shfile : 실험간 사용한 sh 파일
 
-3. moduletest/test is module compile file
+3. moduletest/test : 사용할 함수 미리 테스트
 
 4. moduletest/vhost is editing and testing vhost file
 test1~4 : 모듈테스트 파일
