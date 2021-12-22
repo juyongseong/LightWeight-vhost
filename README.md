@@ -3,10 +3,9 @@
 ### [NetAP: Adaptive Polling Technique for Network Packet Processing in Virtualized Environments](https://www.mdpi.com/2076-3417/10/15/5219)
 --- 
 
-#### 운영체제 : ubuntu 18.04 LTS, linux-5.1.5
+#### 환경 : ubuntu 18.04 LTS, linux-5.1.5, kvm(Linux incorporates a kernel-based virtual machine), 10G NIC
 
-
-#### 폴더 설명
+#### 폴더
 ##### 1. share, savefile : 실험컴퓨터와 가상머신 자료 공유 및 저장
 
 ##### 2. shfile : 쉘스크립트 코드
@@ -14,11 +13,15 @@
 ##### 3. moduletest : 모듈 컴파일 코드
 
 ##### 4. tracefile : ftrace 파일([ftrace란?](https://jjudrgn.tistory.com/26?category=1010336))
-   
+---    
+
+#### 코드
+##### 2. shfile : 쉘스크립트 코드
 
 
 
-####3. moduletest
+
+##### 3. moduletest
 test1~4 : 모듈테스트 파일
 vhost : 예전에 테스트해보던 파일
 vhost2 : 5.1.5 인 현재 버전에서 가져온 vhost파일
