@@ -3,15 +3,22 @@
 ### [NetAP: Adaptive Polling Technique for Network Packet Processing in Virtualized Environments](https://www.mdpi.com/2076-3417/10/15/5219)
 --- 
 
-운영체제 : ubuntu 18.04 LTS, linux-5.1.5
+#### 운영체제 : ubuntu 18.04 LTS, linux-5.1.5
 
 
-폴더 설명
-1. share : 실험컴퓨터와 가상머신 자료 공유 목적
+#### 폴더 설명
+##### 1. share, savefile : 실험컴퓨터와 가상머신 자료 공유 및 저장
 
-2. shfile : 실험간 사용한 쉘스크립트 파일
+##### 2. shfile : 쉘스크립트 코드
 
-3. moduletest
+##### 3. moduletest : 모듈 컴파일 코드
+
+##### 4. tracefile : ftrace 파일([ftrace란?](https://jjudrgn.tistory.com/26?category=1010336))
+   
+
+
+
+####3. moduletest
 test1~4 : 모듈테스트 파일
 vhost : 예전에 테스트해보던 파일
 vhost2 : 5.1.5 인 현재 버전에서 가져온 vhost파일
@@ -41,8 +48,7 @@ X 값 교체할때는 ./testDequqe.c 로 초기화 한뒤에 ./testEnququ.c X �
 vm 종료시에 usleep_range 값이 0이 아닐경우에는 무한루프에 빠져서 종료가 되지 않습니다.
 testDequqe.c이나 testRead.c를 통해서 값이 0이 된것을 dmesg확인한후 vm을 종료합니다.
 
-4. tracefile : ftrace 파일
-   [ftrace란?](https://jjudrgn.tistory.com/26?category=1010336)
+####4. tracefile
 ```
 ftrace trace file
 190813 : 6 vm's vhost*, handle_rx, handle_tx function_graph | TCP_STREAM | 64 size trace file
