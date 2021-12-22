@@ -6,7 +6,9 @@
 #### 환경 : ubuntu 18.04 LTS, linux-5.1.5, kvm(Linux incorporates a kernel-based virtual machine), 10G NIC
 
 #### 사용방법
-vhost 모듈 컴파일 후 vm 사용.
+vhost 모듈 컴파일 후 
+insmod vhost.ko
+vm 사용.
 
 
 
