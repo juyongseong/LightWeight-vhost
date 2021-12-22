@@ -5,6 +5,11 @@
 
 #### 환경 : ubuntu 18.04 LTS, linux-5.1.5, kvm(Linux incorporates a kernel-based virtual machine), 10G NIC
 
+#### 사용방법
+vhost 모듈 컴파일 후 vm 사용.
+
+
+
 #### 폴더
 ##### 1. share, savefile : 실험컴퓨터와 가상머신 자료 공유 및 저장
 
