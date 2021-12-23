@@ -1,9 +1,39 @@
-# LightWeight-vhost
-## Troubleshooting CPU utilization with virt io
-### [NetAP: Adaptive Polling Technique for Network Packet Processing in Virtualized Environments](https://www.mdpi.com/2076-3417/10/15/5219)
+Project LightWeight-vhost, Troubleshooting CPU utilization with virtio
+===
+
+### 논문 : [NetAP: Adaptive Polling Technique for Network Packet Processing in Virtualized Environments](https://www.mdpi.com/2076-3417/10/15/5219)
 --- 
 
-#### 환경 : ubuntu 18.04 LTS, linux-5.1.5, kvm(Linux incorporates a kernel-based virtual machine), 10G NIC
+구성
+=====
+ - 환경
+ 	- ubuntu 18.04 LTS
+ 	- linux-5.1.5
+ 	- 10GbE NIC
+ 	- kvm(QEMU emulator version 2.5.0, 1:2.5+dfsg-5ubuntu10.30)
+ 	- Netperf-2.6.0-2 ([netperf란?](https://jjudrgn.tistory.com/32))
+
+
+
+
+환경설정
+=====
+ - kvm 설치(openstack 사용중일 경우 생략)
+ 	- #egrep -c '(vmx|svm)' /proc/cpuinfo	// cpu가 하드웨어적인 가상화를 지원하는지 확인
+ 	- 0 : 지원x, -> QEMU를 이용하여 반가상화(하드웨어를 에뮬레이터 하는 방식)로 지원하는 QEMU를 사용하게 되며
+ 		-  kvm관련 패키리와 QEMU를 함께설치후 kvm그룹에 사용자 추가
+ 		-  가상 머신추가시 가상화 네트워크와 메모리를 사용
+ 		-  출처 : http://rockball.tistory.com/entry/Ubuntu-KVM-%EC%84%A4%EC%B9%98
+ 	- 1 이상 : 지원o -> 전가상화(하드웨어를 hypervisor를 통해 사용)
+
+ - ㅁㄴㅇ
+
+기존의 문제점
+=====
+ - Efficiency
+ 	- virt io 방식의 CPU utilization 문제
+ 	- 낮은 네트워크 성능에서 오히려 더 높은 CPU 사용량이 나오는 경우가 발견. 
+
 
 #### 사용방법
 실행법
