@@ -6,12 +6,35 @@
 #### 환경 : ubuntu 18.04 LTS, linux-5.1.5, kvm(Linux incorporates a kernel-based virtual machine), 10G NIC
 
 #### 사용방법
-모듈등재
-vhost 모듈 컴파일 후 
-insmod vhost.ko
-vm 사용.
+실행법
+Xshell을 8개(netserver : 6, jy-os(host os) : 2) 키고 개하단의 To All Shell을 사용한다.
+netserver
+ssh ubuntu@10.0.0.2 
+ubuntu//ubuntu
+make한 vhost, vhost_net을 insmod한다. @host os 
+vhost, vhost_net 순으로 insmod하고 vhost_net, vhost 순으로 rmmod 한다.
+insmod vhost_net.ko에서 에러발생한다면 rmmod vhost후에 virsh start vm1으로 기존의 vhost와 vhost_net을 모듈에 적재한후 vm종료후 모듈을 내려준다.
+virsh start vm1 ~ virsh start vm6으로 vm 6개를 킨다.
+netserver에서 lab/autossh.exp 1~ lab/autossh.exp 6으로 vm6개에 connect한다.
+jy-os(host os) 1개와 netserver(gest os) 6개를 lab폴더로 접근한다.
+./setup.sh로 각각 mount와 host os는 vhost pid를 확인한다.
+jy-os에서 setup.sh를 눌러서 pid가 화면에 안뜨거나 ./get_pid.sh를 한뒤 share/midfile/pid.txt에 공백으로 있을시에 get_pid.sh 의 -f 뒤 인자를 수정한다.
+6개를 켰는데 4개만 나온다면 전체 vm종료후 다시킨다.
+moduletest/interval.sh (인터벌)로 us단위 인버발을 조정한다.
+jy-os(host os) 1개와 netserver(gest os) 6개를 lab폴더에서 run.sh를 진행한다
+run.sh 시간 바이트
+run.sh : 1thread, pidstat
+run1.sh : 1thread, perf stat
+perfthread4.sh : 4thread, pidstat
+만약 netserver컴퓨터를 방금 켰다면 ./setup.sh로 netserver port를 open한다.
+share/resultfile/2020~.txt에서 결과를 확인한다.
+vhost cpu 파일이 없을경우 : pid가 잘못됨
+vhost netperf 파일이 없을경우 mount가 잘못됨
+위의 경우는 setup.sh를 다시 진행한다.
+ 인터벌을 또 바꾸고 네트워크 측정은 가능하다.
+측정완료 후 vm 종료 전에는 moduletest/interval.sh 0 으로 인터벌 변수를 0으로 만들어준다.
+vm 종료 & 모듈 제거
 
-성능측정방법 
 
 
 
