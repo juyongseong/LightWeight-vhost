@@ -10,23 +10,26 @@ Project LightWeight-vhost, Troubleshooting CPU utilization with virtio
  	- ubuntu 18.04 LTS
  	- linux-5.1.5
  	- 10GbE NIC
- 	- kvm(QEMU emulator version 2.5.0, 1:2.5+dfsg-5ubuntu10.30)
- 	- Netperf-2.6.0-2 ([netperf란?](https://jjudrgn.tistory.com/32))
+ 	- KVM(QEMU emulator version 2.5.0, 1:2.5+dfsg-5ubuntu10.30)
 
 
 
 
 환경설정
 =====
- - kvm 설치(openstack 사용중일 경우 생략)
+ - kvm 설치
+ 	- virtio, vhost 사용하는 환경 구성(openstack 사용중일 경우 생략). 
  	- #egrep -c '(vmx|svm)' /proc/cpuinfo	// cpu가 하드웨어적인 가상화를 지원하는지 확인
  	- 0 : 지원x, -> QEMU를 이용하여 반가상화(하드웨어를 에뮬레이터 하는 방식)로 지원하는 QEMU를 사용하게 되며
  		-  kvm관련 패키리와 QEMU를 함께설치후 kvm그룹에 사용자 추가
  		-  가상 머신추가시 가상화 네트워크와 메모리를 사용
  		-  출처 : http://rockball.tistory.com/entry/Ubuntu-KVM-%EC%84%A4%EC%B9%98
+ 		-  만약 aws 사용중이라면 참고 : https://github.com/aws-samples/aws-bare-metal-kvm-demo
  	- 1 이상 : 지원o -> 전가상화(하드웨어를 hypervisor를 통해 사용)
-
- - ㅁㄴㅇ
+ 	- vm 생성 후 vhost 모듈 생성 확인
+ - Netperf-2.6.0-2 ([netperf란?](https://jjudrgn.tistory.com/32))
+ 	- 네트워크 성능 측정시 사용. 
+ 
 
 기존의 문제점
 =====
@@ -36,34 +39,38 @@ Project LightWeight-vhost, Troubleshooting CPU utilization with virtio
 
 
 #### 사용방법
-실행법
-Xshell을 8개(netserver : 6, jy-os(host os) : 2) 키고 개하단의 To All Shell을 사용한다.
-netserver
-ssh ubuntu@10.0.0.2 
-ubuntu//ubuntu
-make한 vhost, vhost_net을 insmod한다. @host os 
-vhost, vhost_net 순으로 insmod하고 vhost_net, vhost 순으로 rmmod 한다.
-insmod vhost_net.ko에서 에러발생한다면 rmmod vhost후에 virsh start vm1으로 기존의 vhost와 vhost_net을 모듈에 적재한후 vm종료후 모듈을 내려준다.
-virsh start vm1 ~ virsh start vm6으로 vm 6개를 킨다.
-netserver에서 lab/autossh.exp 1~ lab/autossh.exp 6으로 vm6개에 connect한다.
-jy-os(host os) 1개와 netserver(gest os) 6개를 lab폴더로 접근한다.
-./setup.sh로 각각 mount와 host os는 vhost pid를 확인한다.
-jy-os에서 setup.sh를 눌러서 pid가 화면에 안뜨거나 ./get_pid.sh를 한뒤 share/midfile/pid.txt에 공백으로 있을시에 get_pid.sh 의 -f 뒤 인자를 수정한다.
-6개를 켰는데 4개만 나온다면 전체 vm종료후 다시킨다.
-moduletest/interval.sh (인터벌)로 us단위 인버발을 조정한다.
-jy-os(host os) 1개와 netserver(gest os) 6개를 lab폴더에서 run.sh를 진행한다
-run.sh 시간 바이트
-run.sh : 1thread, pidstat
-run1.sh : 1thread, perf stat
-perfthread4.sh : 4thread, pidstat
-만약 netserver컴퓨터를 방금 켰다면 ./setup.sh로 netserver port를 open한다.
-share/resultfile/2020~.txt에서 결과를 확인한다.
-vhost cpu 파일이 없을경우 : pid가 잘못됨
-vhost netperf 파일이 없을경우 mount가 잘못됨
-위의 경우는 setup.sh를 다시 진행한다.
- 인터벌을 또 바꾸고 네트워크 측정은 가능하다.
-측정완료 후 vm 종료 전에는 moduletest/interval.sh 0 으로 인터벌 변수를 0으로 만들어준다.
-vm 종료 & 모듈 제거
+=====
+ - LightWeight-vhost 모듈 적재 방법.
+ - 
+
+ - 쉘스크립트 실행법
+	- Xshell을 8개(netserver : 6, jy-os(host os) : 2) 키고 개하단의 To All Shell을 사용한다.
+	- netserver
+	- ssh ubuntu@10.0.0.2 
+	- ubuntu//ubuntu
+	- make한 vhost, vhost_net을 insmod한다. @host os 
+	- vhost, vhost_net 순으로 insmod하고 vhost_net, vhost 순으로 rmmod 한다.
+	- insmod vhost_net.ko에서 에러발생한다면 rmmod vhost후에 virsh start vm1으로 기존의 vhost와 vhost_net을 모듈에 적재한후 vm종료후 모듈을 내려준다.
+	- virsh start vm1 ~ virsh start vm6으로 vm 6개를 킨다.
+	- netserver에서 lab/autossh.exp 1~ lab/autossh.exp 6으로 vm6개에 connect한다.
+	- jy-os(host os) 1개와 netserver(gest os) 6개를 lab폴더로 접근한다.
+	- ./setup.sh로 각각 mount와 host os는 vhost pid를 확인한다.
+	- jy-os에서 setup.sh를 눌러서 pid가 화면에 안뜨거나 ./get_pid.sh를 한뒤 share/midfile/pid.txt에 공백으로 있을시에 get_pid.sh 의 -f 뒤 인자를 수정한다.
+	- 6개를 켰는데 4개만 나온다면 전체 vm종료후 다시킨다.
+	- moduletest/interval.sh (인터벌)로 us단위 인버발을 조정한다.
+	- jy-os(host os) 1개와 netserver(gest os) 6개를 lab폴더에서 run.sh를 진행한다
+	- run.sh 시간 바이트
+	- run.sh : 1thread, pidstat
+	- run1.sh : 1thread, perf stat
+	- perfthread4.sh : 4thread, pidstat
+	- 만약 netserver컴퓨터를 방금 켰다면 ./setup.sh로 netserver port를 open한다.
+	- share/resultfile/2020~.txt에서 결과를 확인한다.
+	- vhost cpu 파일이 없을경우 : pid가 잘못됨
+	- vhost netperf 파일이 없을경우 mount가 잘못됨
+	- 위의 경우는 setup.sh를 다시 진행한다.
+	-  인터벌을 또 바꾸고 네트워크 측정은 가능하다.
+	- 측정완료 후 vm 종료 전에는 moduletest/interval.sh 0 으로 인터벌 변수를 0으로 만들어준다.
+	- vm 종료 & 모듈 제거
 
 
 
