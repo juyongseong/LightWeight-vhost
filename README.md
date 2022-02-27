@@ -169,8 +169,13 @@ function description
                             tx_can_batch {
 0)   0.103 us    |            vhost_vq_avail_empty [vhost](); /* return true if we're sure that avaiable ring is empty */
                             }
-0)               |          vhost_add_used_and_signal [vhost]() { //DMA가 어떤 이유로 더 낮은 장치 드라이버 순서로 되어 있지 않은 경우. upend_idx는 사용된 idx의 끝을 추적하는 데 사용되며, done_idx는 사용된 idx의 헤드를 추적하는 데 사용된다. 낮은 디바이스 DMA가 연속적으로 수행되면 사용된 KVM 게스트 idx에 신호를 보낼 것이다.
-0)               |            vhost_add_used_n [vhost]() { //그 버퍼들 중 하나를 사용한 후에, 우리는 그들에게 그것에 대해 이야기한다. 그런 다음 eventfd를 사용하여 게스트에게 알려야 한다.
+0)               |          vhost_add_used_and_signal [vhost]() { 
+//DMA가 어떤 이유로 더 낮은 장치 드라이버 순서로 되어 있지 않은 경우. 
+//upend_idx는 사용된 idx의 끝을 추적하는 데 사용되며, done_idx는 사용된 idx의 헤드를 추적하는 데 사용된다. 
+//낮은 디바이스 DMA가 연속적으로 수행되면 사용된 KVM 게스트 idx에 신호를 보낼 것이다.
+0)               |            vhost_add_used_n [vhost]() { 
+//그 버퍼들 중 하나를 사용한 후에, 우리는 그들에게 그것에 대해 이야기한다. 
+//그런 다음 eventfd를 사용하여 게스트에게 알려야 한다.
 0)   0.125 us    |              __vhost_add_used_n [vhost]();
 0)   0.352 us    |            }
 0)   0.126 us    |            vhost_signal [vhost](); //This actually signals the guest, using eventfd.
